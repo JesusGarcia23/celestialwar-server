@@ -29,18 +29,38 @@ app.get('/', function (req, res) {
   });
 
 let players = {};
+let rooms = {};
 
 // SOCKET HERE
 io = socketIo(server)
 io.on('connection', socket => {
-    console.log('new conection established')
+    console.log('new conection established ', socket.id)
 
-    socket.on('addNewPlayer', () => {
+    socket.on('addNewPlayer', (username) => {
+        let accepted = true;
         console.log("Adding new player..")
+        console.log(username);
+        let playerAlreadyExist = players[username];
+        if (playerAlreadyExist === undefined) {
+            console.log("DOES NOT EXIST")
+            players[username] = {
+                id: socket.id,
+                username: username
+            }
+        } else {
+            console.log("ALREADY EXISTS")
+            accepted = false;
+        }
+        console.log(players);
+        socket.emit('newPlayerAccepted', {username: username, accepted: accepted})
     })
 
     socket.on('disconnect', () => { 
-        console.log('an user disconnected')
+        console.log('an user disconnected ', socket.id)
+
+        for (let value of Object.values(players)) {
+            delete players[value.username]
+        }
     })
 
     socket.on('hellosocket', () => {
