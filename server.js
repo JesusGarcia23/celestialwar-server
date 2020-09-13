@@ -29,13 +29,21 @@ app.get('/', function (req, res) {
   });
 
 let players = {};
-let rooms = {};
+let rooms = [
+    {
+        id: 1,
+        name: "Hello World",
+        players: [],
+    }
+];
+let listGameStatus = {}
 
 // SOCKET HERE
 io = socketIo(server)
 io.on('connection', socket => {
     console.log('new conection established ', socket.id)
 
+    // add new player
     socket.on('addNewPlayer', (username) => {
         let accepted = true;
         console.log("Adding new player..")
@@ -53,6 +61,14 @@ io.on('connection', socket => {
         }
         console.log(players);
         socket.emit('newPlayerAccepted', {username: username, accepted: accepted})
+    })
+
+    socket.on('getAllRooms', () => {
+        socket.emit('sendAllRooms', rooms);
+    })
+
+    socket.on('createNewRoom', (newRoom) => {
+        console.log(newRoom)
     })
 
     socket.on('disconnect', () => { 
