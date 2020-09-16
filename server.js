@@ -36,13 +36,16 @@ let rooms = [
         players: [],
     }
 ];
+
 let listGameStatus = {}
 
 // SOCKET HERE
 io = socketIo(server)
 io.on('connection', socket => {
+ 
     console.log('new conection established ', socket.id)
-
+    console.log("LIST OF ALL PLAYERS")
+    console.log(players)
     // add new player
     socket.on('addNewPlayer', (username) => {
         let accepted = true;
@@ -72,15 +75,13 @@ io.on('connection', socket => {
     })
 
     socket.on('disconnect', () => { 
-        console.log('an user disconnected ', socket.id)
-
-        for (let value of Object.values(players)) {
-            delete players[value.username]
+        for (let player of Object.values(players)) {
+            console.log(player)
+            if(socket.id === player.id) {
+                console.log('an user disconnected: ', player.username);
+                delete players[player.username];
+            }
         }
-    })
-
-    socket.on('hellosocket', () => {
-        console.log('Socket working!')
     })
 
 })
