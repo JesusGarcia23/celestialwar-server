@@ -71,7 +71,14 @@ io.on('connection', socket => {
     })
 
     socket.on('createNewRoom', (newRoom) => {
-        console.log(newRoom)
+        let newRoomCreated =     
+        {
+            id: rooms.length + 1,
+            name: newRoom.roomName,
+            players: [],
+        }
+        rooms.push(newRoomCreated);
+        socket.emit('sendAllRooms', rooms);
     })
 
     socket.on('disconnect', () => { 
