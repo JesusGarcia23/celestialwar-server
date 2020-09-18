@@ -46,7 +46,8 @@ io.on('connection', socket => {
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")
     console.log(players)
-    // add new player
+
+    // request to add new player
     socket.on('addNewPlayer', (username) => {
         let accepted = true;
         console.log("Adding new player..")
@@ -66,10 +67,12 @@ io.on('connection', socket => {
         socket.emit('newPlayerAccepted', {username: username, accepted: accepted})
     })
 
+    // request from client to get all Rooms
     socket.on('getAllRooms', () => {
         socket.emit('sendAllRooms', rooms);
     })
-
+    
+    // request from client to create new room
     socket.on('createNewRoom', (newRoom) => {
         let newRoomCreated =     
         {
@@ -78,7 +81,12 @@ io.on('connection', socket => {
             players: [],
         }
         rooms.push(newRoomCreated);
-        socket.emit('sendAllRooms', rooms);
+        io.sockets.emit('newRoomCreated', {rooms, accepted: true});
+    })
+
+    // request from client to join room
+    socket.on('joinRoom', (roomId) => {
+        console.log("TRYING TO JOIN ROOM: ", roomId);
     })
 
     socket.on('disconnect', () => { 
