@@ -54,17 +54,30 @@ io.on('connection', socket => {
         console.log(username);
         let playerAlreadyExist = players[username];
         if (playerAlreadyExist === undefined) {
-            console.log("DOES NOT EXIST")
             players[username] = {
                 id: socket.id,
                 username: username
             }
         } else {
-            console.log("ALREADY EXISTS")
             accepted = false;
         }
         console.log(players);
         socket.emit('newPlayerAccepted', {username: username, accepted: accepted})
+    })
+
+    socket.on('getUser', (username) => {
+        let accepted = true;
+        console.log(username)
+        let playerAlreadyExist = players[username];
+        if (playerAlreadyExist === undefined && username !== null) {
+            players[username] = {
+                id: socket.id,
+                username: username
+            }
+        } else {
+            accepted = false;
+        }
+        socket.emit('loggedIn', {username: username, accepted: accepted})
     })
 
     // request from client to get all Rooms
@@ -80,8 +93,16 @@ io.on('connection', socket => {
             name: newRoom.roomName,
             players: [],
         }
-        rooms.push(newRoomCreated);
-        io.sockets.emit('newRoomCreated', {rooms, accepted: true});
+
+        let roomExists = rooms.findIndex(room => room.name === newRoom.roomName);
+
+        if(roomExists >= 0) {
+            socket.emit('newRoomCreated', {rooms, accepted: false});
+        } else {
+            rooms.push(newRoomCreated);
+            socket.emit('goToCreatedRoom', {newRoomCreated, accepted: true});
+            io.sockets.emit('newRoomCreated', {rooms, accepted: true});
+        }
     })
 
     // request from client to join room
