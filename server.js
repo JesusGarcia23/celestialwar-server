@@ -1,6 +1,8 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require("socket.io");
+const userEvents = require('./sockets/events/userEvents');
+const roomEvents = require('./sockets/events/roomEvents');
 
 let app = express(), io;
 const server = http.createServer(app)
@@ -42,74 +44,18 @@ let listGameStatus = {}
 // SOCKET HERE
 io = socketIo(server)
 io.on('connection', socket => {
+
+    // User Sockets
+    userEvents.addNewPlayer(socket, players);
+    userEvents.createNewRoom(io, socket, rooms);
+
+    // Rooms Sockets
+    roomEvents.getAllRooms(socket, rooms);
  
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")
     console.log(players)
-
-    // request to add new player
-    socket.on('addNewPlayer', (username) => {
-        let accepted = true;
-        console.log("Adding new player..")
-        console.log(username);
-        let playerAlreadyExist = players[username];
-        if (playerAlreadyExist === undefined) {
-            players[username] = {
-                id: socket.id,
-                username: username
-            }
-        } else {
-            accepted = false;
-        }
-        console.log(players);
-        socket.emit('newPlayerAccepted', {username: username, accepted: accepted})
-    })
-
-    socket.on('getUser', (username) => {
-        let accepted = true;
-        console.log(username)
-        let playerAlreadyExist = players[username];
-        if (playerAlreadyExist === undefined && username !== null) {
-            players[username] = {
-                id: socket.id,
-                username: username
-            }
-        } else {
-            accepted = false;
-        }
-        socket.emit('loggedIn', {username: username, accepted: accepted})
-    })
-
-    // request from client to get all Rooms
-    socket.on('getAllRooms', () => {
-        socket.emit('sendAllRooms', rooms);
-    })
     
-    // request from client to create new room
-    socket.on('createNewRoom', (newRoom) => {
-        let newRoomCreated =     
-        {
-            id: rooms.length + 1,
-            name: newRoom.roomName,
-            players: [],
-        }
-
-        let roomExists = rooms.findIndex(room => room.name === newRoom.roomName);
-
-        if(roomExists >= 0) {
-            socket.emit('newRoomCreated', {rooms, accepted: false});
-        } else {
-            rooms.push(newRoomCreated);
-            socket.emit('goToCreatedRoom', {newRoomCreated, accepted: true});
-            io.sockets.emit('newRoomCreated', {rooms, accepted: true});
-        }
-    })
-
-    // request from client to join room
-    socket.on('joinRoom', (roomId) => {
-        console.log("TRYING TO JOIN ROOM: ", roomId);
-    })
-
     socket.on('disconnect', () => { 
         for (let player of Object.values(players)) {
             console.log(player)
