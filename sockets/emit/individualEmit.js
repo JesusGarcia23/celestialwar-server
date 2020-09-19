@@ -1,4 +1,9 @@
 module.exports = {
+
+    loggedIn(socket, data) {
+        socket.emit('loggedIn', {username: data.username, accepted: data.accepted})
+    },
+
     newPlayerAccepted(socket, data) {
         socket.emit('newPlayerAccepted', {username: data.username, accepted: data.accepted})
     },
@@ -7,7 +12,7 @@ module.exports = {
         socket.emit('sendAllRooms', rooms);
     },
 
-    goToCreatedRoom(socket, data) {
-        socket.emit('goToCreatedRoom', {newRoomCreated: data.newRoomCreated, accepted: data.accepted});
+    goToRoom(socket, data) {
+        socket.emit('goToRoom', {roomId: data.roomId, accepted: data.accepted});
     },
 }

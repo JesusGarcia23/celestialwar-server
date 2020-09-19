@@ -46,11 +46,13 @@ io = socketIo(server)
 io.on('connection', socket => {
 
     // User Sockets
+    userEvents.getUser(socket, players);
     userEvents.addNewPlayer(socket, players);
     userEvents.createNewRoom(io, socket, rooms);
 
     // Rooms Sockets
     roomEvents.getAllRooms(socket, rooms);
+    roomEvents.joinRoom(socket, rooms)
  
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")

@@ -10,8 +10,9 @@ module.exports = {
     },
 
     joinRoom (socket, rooms) {
-        socket.on('joinRoom', (roomId) => {
-            console.log("TRYING TO JOIN ROOM: ", roomId);
+        socket.on('joinRoom', (data) => {
+            console.log("TRYING TO JOIN ROOM: ", data);
+            individualEmit.goToRoom(socket, {roomId: data.roomId, accepted: true});
         })
     },
 }

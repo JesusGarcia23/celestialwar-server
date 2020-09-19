@@ -1,24 +1,40 @@
 const globalEmit = require('../emit/globalEmit');
 const individualEmit = require('../emit/individualEmit');
 const errorEmit = require('../emit/errorEmit');
+const validators = require('../../utils/validators');
+
 module.exports = {
 
-    addNewPlayer (socket, players) {
-        socket.on('addNewPlayer', (username) => {
+    getUser (socket, players) {
+        socket.on('getUser', (username) => {
             let accepted = true;
-            let playerAlreadyExist = players[username];
-            if (playerAlreadyExist === undefined) {
-                console.log("Adding new player..")
-                console.log(username);
+            let playerExists = validators.checkPlayerExistence(username, players);
+            if (!playerExists) {
                 players[username] = {
                     id: socket.id,
                     username: username
                 }
-                console.log(players);
+                individualEmit.loggedIn(socket, {username: username, accepted: accepted});
+            } else {
+                individualEmit.loggedIn(socket, {username: username, accepted: false});
+                errorEmit.sendError(socket, {type: 'username', message: 'Username already in use'});
+            }
+        })
+    },
+
+    addNewPlayer (socket, players) {
+        socket.on('addNewPlayer', (username) => {
+            let accepted = true;
+            let playerExists = validators.checkPlayerExistence(username, players);
+            if (!playerExists) {
+                players[username] = {
+                    id: socket.id,
+                    username: username
+                }
                 individualEmit.newPlayerAccepted(socket, {username: username, accepted: accepted});
             } else {
-                errorEmit.sendError(socket, {type: 'user', message: 'User already exists'});
-                accepted = false;
+                individualEmit.newPlayerAccepted(socket, {username: username, accepted: false});
+                errorEmit.sendError(socket, {type: 'username', message: 'Username already in use'});
             }
         })
     },
@@ -38,7 +54,7 @@ module.exports = {
                 errorEmit.sendError(socket, {type: 'room', message: 'Room already exists'});
             } else {
                 rooms.push(newRoomCreated);
-                individualEmit.goToCreatedRoom(socket, {newRoomCreated, accepted: true});
+                individualEmit.goToRoom(socket, {roomId: newRoomCreated.id, accepted: true});
                 globalEmit.newRoomCreated(io, {rooms, accepted: true});
             }
         })
