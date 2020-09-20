@@ -36,10 +36,42 @@ let rooms = [
         id: 1,
         name: "Hello World",
         players: [],
+        angelTeam: [],
+        demonTeam: [],
+        settings: {
+            "map": "forest"
+        },
+        map: "forest",
+
     }
 ];
 
-let listGameStatus = {}
+let listGameStatus = [
+    {
+        id: 0,
+        players: [
+            {
+                name: "",
+                side: "",
+                x: 0,
+                y: 0,
+                alive: true,
+                modeWarrior: false,
+                sphereGrabbed: false,
+                king: false,
+            }
+        ],
+        demonTeam: {
+            kills: 0,
+            containersFilled: 0,
+        },
+        angelTeam: {
+            kills: 0,
+            containersFilled: 0,
+        },
+        map: "",
+    }
+]
 
 // SOCKET HERE
 io = socketIo(server)
