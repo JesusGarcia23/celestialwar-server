@@ -93,8 +93,22 @@ io.on('connection', socket => {
     
     socket.on('disconnect', () => { 
         for (let player of Object.values(players)) {
-            console.log(player)
-            if(socket.id === player.id) {
+
+            // Match socket with player
+            if(socket.id === player.id) {  
+                
+                // Find the room where player is located
+                let roomWherePlayerIsLocatedIndex = rooms.findIndex(room => room.players.findIndex(player => player.username === player.username) >= 0)
+
+                if (roomWherePlayerIsLocatedIndex >= 0) {
+                    
+                    let roomToUpdate = rooms[roomWherePlayerIsLocatedIndex];
+
+                    // Find the player position in "players" array inside the room object
+                    let playerToRemoveIndex = roomToUpdate.players.findIndex(playerInRoom => playerInRoom.username === player.username);
+                    roomToUpdate.players.splice(playerToRemoveIndex,1);
+                    
+                }
                 console.log('an user disconnected: ', player.username);
                 delete players[player.username];
             }
