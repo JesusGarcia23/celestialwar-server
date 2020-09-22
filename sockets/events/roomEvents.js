@@ -11,8 +11,20 @@ module.exports = {
 
     joinRoom (socket, rooms) {
         socket.on('joinRoom', (data) => {
-            console.log("TRYING TO JOIN ROOM: ", data);
-            individualEmit.goToRoom(socket, {roomId: data.roomId, accepted: true});
+            console.log(rooms)
+            const roomToJoinIndex = rooms.findIndex(room => room.id === data.roomId);
+
+            if (roomToJoinIndex >= 0) {
+                let actualRoom = rooms[roomToJoinIndex];
+                actualRoom.players.push(data.player);
+                console.log("TRYING TO JOIN ROOM: ", data);
+                console.log(rooms[roomToJoinIndex]);
+                individualEmit.goToRoom(socket, {roomId: data.roomId, accepted: true});
+            }
         })
     },
+
+    getRoomData (socket, rooms) {
+
+    }
 }

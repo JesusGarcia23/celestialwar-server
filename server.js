@@ -84,6 +84,7 @@ io.on('connection', socket => {
 
     // Rooms Sockets
     roomEvents.getAllRooms(socket, rooms);
+    roomEvents.getRoomData(socket, rooms);
     roomEvents.joinRoom(socket, rooms)
  
     console.log('new conection established ', socket.id)
