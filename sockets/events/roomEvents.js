@@ -1,4 +1,5 @@
 const globalEmit = require('../emit/globalEmit');
+const groupalEmit = require('../emit/groupalEmit');
 const individualEmit = require('../emit/individualEmit');
 
 module.exports = {
@@ -22,8 +23,10 @@ module.exports = {
                 if (isUserAlreadyInRoom < 0) {
                     actualRoom.players.push(data.player);
                 }
-                console.log(rooms[roomToJoinIndex]);
-                individualEmit.goToRoom(socket, {roomId: data.roomId, accepted: true});
+                socket.join(`room/${data.roomId}`);
+                individualEmit.goToRoom(socket, {player: data.player, roomId: data.roomId, accepted: true});
+                groupalEmit.updateIndividualRoomData(socket, data.roomId, "Hello World");
+                // socket.emit(`room/${data.roomId}`, "Hello World");
             }
             else {
                 console.log("ROOM NOT FOUND");
@@ -36,7 +39,7 @@ module.exports = {
             console.log("LIST OF FROM SERVER: ")
             console.log(rooms)
             console.log(data)
-            
+            const { roomId } = data;            
         })
     }
 }

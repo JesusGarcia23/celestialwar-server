@@ -1,5 +1,7 @@
 module.exports = {
-    updateRoomData (io, data) {
-        io.sockets.emit('newRoomCreated', {rooms: data.rooms, accepted: data.accepted});
-    },
+
+    updateIndividualRoomData (socket, roomId, data) {
+        socket.broadcast.to(`room/${roomId}`).emit('getUpdatedRoom', data);
+    }
+
 }

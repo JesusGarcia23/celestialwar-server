@@ -13,6 +13,6 @@ module.exports = {
     },
 
     goToRoom(socket, data) {
-        socket.emit('goToRoom', {roomId: data.roomId, accepted: data.accepted});
+        socket.emit('goToRoom', {user: data.player, roomId: data.roomId, accepted: data.accepted});
     },
 }

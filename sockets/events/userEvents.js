@@ -24,16 +24,18 @@ module.exports = {
 
     addNewPlayer (socket, players) {
         socket.on('addNewPlayer', (username) => {
-            let accepted = true;
+            console.log(username)
+            let accepted = false;
             let playerExists = validators.checkPlayerExistence(username, players);
             if (!playerExists) {
                 players[username] = {
                     id: socket.id,
                     username: username
                 }
+                accepted = true;
                 individualEmit.newPlayerAccepted(socket, {username: username, accepted: accepted});
             } else {
-                individualEmit.newPlayerAccepted(socket, {username: username, accepted: false});
+                individualEmit.newPlayerAccepted(socket, {username: username, accepted: accepted});
                 errorEmit.sendError(socket, {type: 'username', message: 'Username already in use'});
             }
         })
