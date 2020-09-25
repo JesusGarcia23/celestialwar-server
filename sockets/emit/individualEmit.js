@@ -12,7 +12,11 @@ module.exports = {
         socket.emit('sendAllRooms', rooms);
     },
 
+    getInitialRoomData(socket, data) {
+        socket.emit('getInitialRoomData', data);
+    },
+
     goToRoom(socket, data) {
-        socket.emit('goToRoom', {user: data.player, roomId: data.roomId, accepted: data.accepted});
+        socket.emit('goToRoom', {user: data.player, roomInfo: data.roomInfo, accepted: data.accepted});
     },
 }

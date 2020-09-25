@@ -19,13 +19,28 @@ module.exports = {
                 let actualRoom = rooms[roomToJoinIndex];
                 console.log("JOINING TO ROOM: ", data);
                 let isUserAlreadyInRoom = actualRoom.players.findIndex(player => player.username === data.player.username);
+                console.log(isUserAlreadyInRoom)
+                //  Check for room max capacity
+                if(actualRoom.players > 10) {
+                    return;
+                }
 
+                //  Check if user is already in room (so is not pushed to array again)
                 if (isUserAlreadyInRoom < 0) {
                     actualRoom.players.push(data.player);
+
+                    if(actualRoom.angelTeam.length < 5 && actualRoom.angelTeam.length <= actualRoom.demonTeam.length) {
+                        actualRoom.angelTeam.push(data.player);
+                    } else if(actualRoom.demonTeam.length < 5 && actualRoom.demonTeam.length <= actualRoom.angelTeam.length) {
+                        actualRoom.demonTeam.push(data.player);
+                    }
+
+
                 }
-                socket.join(`room/${data.roomId}`);
-                individualEmit.goToRoom(socket, {player: data.player, roomId: data.roomId, accepted: true});
-                groupalEmit.updateIndividualRoomData(socket, data.roomId, "Hello World");
+                socket.join(`room/${actualRoom.id}`);
+                individualEmit.goToRoom(socket, {player: data.player, accepted: true, roomInfo: actualRoom});
+                groupalEmit.updateIndividualRoomData(socket, actualRoom);
+                console.log(rooms)
                 // socket.emit(`room/${data.roomId}`, "Hello World");
             }
             else {
