@@ -29,9 +29,14 @@ module.exports = {
                 if (isUserAlreadyInRoom < 0) {
                     actualRoom.players.push(data.player);
 
-                    if(actualRoom.angelTeam.length < 5 && actualRoom.angelTeam.length <= actualRoom.demonTeam.length) {
+                    let isPlayerAlreadyOnATeam = actualRoom.angelTeam.findIndex(player => player.username === data.player.username);
+                    let isPlayerInDemonTeam = actualRoom.demonTeam.findIndex(player => player.username === data.player.username);
+
+                    let playerWithoutTeam = (isPlayerAlreadyOnATeam < 0) && (isPlayerInDemonTeam < 0)
+
+                    if(actualRoom.angelTeam.length < 5 && actualRoom.angelTeam.length <= actualRoom.demonTeam.length && playerWithoutTeam) {
                         actualRoom.angelTeam.push(data.player);
-                    } else if(actualRoom.demonTeam.length < 5 && actualRoom.demonTeam.length <= actualRoom.angelTeam.length) {
+                    } else if(actualRoom.demonTeam.length < 5 && actualRoom.demonTeam.length <= actualRoom.angelTeam.length && playerWithoutTeam) {
                         actualRoom.demonTeam.push(data.player);
                     }
 
