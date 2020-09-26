@@ -35,6 +35,7 @@ let rooms = [
     {
         id: 1,
         name: "Hello World",
+        host: "",
         players: [],
         angelTeam: [],
         demonTeam: [],
@@ -92,43 +93,6 @@ io.on('connection', socket => {
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")
     console.log(players)
-    
-    // socket.on('disconnect', () => { 
-    //     for (let player of Object.values(players)) {
-
-    //         // Match socket with player
-    //         if(socket.id === player.id) {  
-                
-    //             // Find the room where player is located
-    //             let roomWherePlayerIsLocatedIndex = rooms.findIndex(room => room.players.findIndex(player => player.username === player.username) >= 0)
-
-    //             if (roomWherePlayerIsLocatedIndex >= 0) {
-                    
-    //                 let roomToUpdate = rooms[roomWherePlayerIsLocatedIndex];
-
-    //                 // Find the player position in "players" array inside the room object
-    //                 let playerToRemoveIndex = roomToUpdate.players.findIndex(playerInRoom => playerInRoom.username === player.username);
-
-    //                 let playerToRemoveIndexAngelTeam = roomToUpdate.angelTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
-
-    //                 let playerToRemoveIndexDemonTeam = roomToUpdate.demonTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
-
-    //                 console.log(playerToRemoveIndexAngelTeam);
-
-    //                 if(playerToRemoveIndexAngelTeam >= 0) {
-    //                     roomToUpdate.angelTeam.splice(playerToRemoveIndex,1);
-    //                 } else if (playerToRemoveIndexDemonTeam >= 0) {
-    //                     roomToUpdate.demonTeam.splice(playerToRemoveIndex,1);
-    //                 }
-
-    //                 roomToUpdate.players.splice(playerToRemoveIndex,1);
-                    
-    //             }
-    //             console.log('an user disconnected: ', player.username);
-    //             delete players[player.username];
-    //         }
-    //     }
-    // })
 
 })
 

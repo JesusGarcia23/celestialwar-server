@@ -38,7 +38,7 @@ module.exports = {
 
                 }
                 socket.join(`room/${actualRoom.id}`);
-                individualEmit.goToRoom(socket, {player: data.player, accepted: true, roomInfo: actualRoom});
+                individualEmit.goToRoom(socket, {player: data.player, roomInfo: actualRoom, accepted: true});
                 groupalEmit.updateIndividualRoomData(socket, actualRoom);
                 console.log(rooms)
                 // socket.emit(`room/${data.roomId}`, "Hello World");

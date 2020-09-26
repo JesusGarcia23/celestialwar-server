@@ -25,7 +25,7 @@ module.exports = {
 
     addNewPlayer (socket, players) {
         socket.on('addNewPlayer', (username) => {
-            console.log(username)
+
             let accepted = false;
             let playerExists = validators.checkPlayerExistence(username, players);
             if (!playerExists) {
@@ -43,21 +43,33 @@ module.exports = {
     },
 
     createNewRoom (io, socket, rooms) {
-        socket.on('createNewRoom', (newRoom) => {
+        socket.on('createNewRoom', (data) => {
+   
+            const { user, newRoom} = data
+
             let newRoomCreated =     
             {
                 id: rooms.length + 1,
                 name: newRoom.roomName,
-                players: [],
+                host: user.username,
+                players: [user],
+                angelTeam: [user],
+                demonTeam: [],
+                gameStarted: false,
+                settings: {
+                    "map": "forest"
+                },
+                map: "forest",
+        
             }
     
             let roomExists = rooms.findIndex(room => room.name === newRoom.roomName);
-            console.log(roomExists)
+
             if(roomExists >= 0) {
                 errorEmit.sendError(socket, {type: 'room', message: 'Room already exists'});
             } else {
                 rooms.push(newRoomCreated);
-                individualEmit.goToRoom(socket, {roomId: newRoomCreated.id, accepted: true});
+                individualEmit.goToRoom(socket, {roomInfo: newRoomCreated, accepted: true});
                 globalEmit.newRoomCreated(io, {rooms, accepted: true});
             }
         })
@@ -83,8 +95,6 @@ module.exports = {
                         let playerToRemoveIndexAngelTeam = roomToUpdate.angelTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
 
                         let playerToRemoveIndexDemonTeam = roomToUpdate.demonTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
-
-                        console.log(playerToRemoveIndexAngelTeam);
 
                         if(playerToRemoveIndexAngelTeam >= 0) {
                             roomToUpdate.angelTeam.splice(playerToRemoveIndex,1);
