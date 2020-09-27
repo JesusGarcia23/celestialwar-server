@@ -1,9 +1,7 @@
 module.exports = {
 
-    updateIndividualRoomData (socket, data) {
-        console.log("THIS WAS SENT")
-        console.log(data);
-        socket.broadcast.to(`room/${data.id}`).emit('getUpdatedRoom', data);
+    updateRoomData (io, data) {
+        io.in(`room/${data.id}`).emit('getUpdatedRoom', data);
     }
 
 }

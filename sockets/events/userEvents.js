@@ -97,12 +97,15 @@ module.exports = {
                         let playerToRemoveIndexDemonTeam = roomToUpdate.demonTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
 
                         if(playerToRemoveIndexAngelTeam >= 0) {
-                            roomToUpdate.angelTeam.splice(playerToRemoveIndex,1);
-                        } else if (playerToRemoveIndexDemonTeam >= 0) {
-                            roomToUpdate.demonTeam.splice(playerToRemoveIndex,1);
+                            roomToUpdate.angelTeam.splice(playerToRemoveIndexAngelTeam,1);
                         }
 
-                        roomToUpdate.players.splice(playerToRemoveIndex,1);
+                        if (playerToRemoveIndexDemonTeam >= 0) {
+                            roomToUpdate.demonTeam.splice(playerToRemoveIndexDemonTeam,1);
+                        }
+
+                        roomToUpdate.players.splice(playerToRemoveIndex, 1);
+
                         groupalEmit.updateIndividualRoomData(socket, roomToUpdate);
                     }
                     console.log('an user disconnected: ', player.username);

@@ -17,7 +17,6 @@ module.exports = {
     },
 
     goToRoom(socket, data) {
-        console.log(data)
         socket.emit('goToRoom', {user: data.player, roomInfo: data.roomInfo, accepted: data.accepted});
     },
 }

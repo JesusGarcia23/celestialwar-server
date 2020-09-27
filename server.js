@@ -87,8 +87,8 @@ io.on('connection', socket => {
 
     // Rooms Sockets
     roomEvents.getAllRooms(socket, rooms);
-    roomEvents.getRoomData(socket, rooms);
-    roomEvents.joinRoom(socket, rooms)
+    roomEvents.joinRoom(io, socket, rooms);
+    roomEvents.swapTeam(io, socket, rooms);
  
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")
