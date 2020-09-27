@@ -75,7 +75,7 @@ module.exports = {
         })
     },
 
-    disconnection (socket, players, rooms ) {
+    disconnection (io ,socket, players, rooms ) {
         socket.on('disconnect', () => { 
             for (let player of Object.values(players)) {
 
@@ -106,7 +106,7 @@ module.exports = {
 
                         roomToUpdate.players.splice(playerToRemoveIndex, 1);
 
-                        groupalEmit.updateIndividualRoomData(socket, roomToUpdate);
+                        groupalEmit.updateRoomData(io, roomToUpdate);
                     }
                     console.log('an user disconnected: ', player.username);
                     delete players[player.username];

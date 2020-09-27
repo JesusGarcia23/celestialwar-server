@@ -83,7 +83,7 @@ io.on('connection', socket => {
     userEvents.getUser(socket, players);
     userEvents.addNewPlayer(socket, players);
     userEvents.createNewRoom(io, socket, rooms);
-    userEvents.disconnection(socket, players, rooms);
+    userEvents.disconnection(io, socket, players, rooms);
 
     // Rooms Sockets
     roomEvents.getAllRooms(socket, rooms);
