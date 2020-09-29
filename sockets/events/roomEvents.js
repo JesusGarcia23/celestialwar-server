@@ -55,6 +55,26 @@ module.exports = {
         })
     },
 
+    sendMessage (io, socket, rooms) {
+        socket.on('sendMessage', (data) => {
+            console.log(data);
+            const {player, message, roomId } = data
+
+            let actualRoomIndex = rooms.findIndex(room => room.id === roomId);
+
+            if(actualRoomIndex >= 0) {
+                let actualRoom = rooms[actualRoomIndex];
+                let newMessage = {
+                    sender: player.username,
+                    message: message,
+                    time: new Date()
+                }
+                actualRoom.messages.push(newMessage);
+                groupalEmit.updateRoomData(io, actualRoom);
+            }
+        })
+    },
+
     swapTeam (io, socket, rooms) {
         socket.on('swapTeam', (data) => {
             console.log("SWAPING TEAM...")

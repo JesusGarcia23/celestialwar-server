@@ -60,6 +60,7 @@ module.exports = {
                     "map": "forest"
                 },
                 map: "forest",
+                messages: []
         
             }
     

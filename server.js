@@ -43,8 +43,16 @@ let rooms = [
         settings: {
             "map": "forest"
         },
-        map: "forest",
-
+        messages: [{sender: "Admin", message: "Hello World", time: new Date()},
+        {sender: "jesus", message: "hello Jesus", time: new Date()},
+        {sender: "Admin", message: "Hello World", time: new Date()},
+        {sender: "Admin", message: "Hello World", time: new Date()},
+        {sender: "Admin", message: "Hello World", time: new Date()},
+        {sender: "Admin", message: "Hello World", time: new Date()},
+        {sender: "Admin", message: "Hello World", time: new Date()},
+        {sender: "Admin", message: "Hello World", time: new Date()},
+        {sender: "Admin", message: "Hello World", time: new Date()},
+        ]
     }
 ];
 
@@ -88,6 +96,7 @@ io.on('connection', socket => {
     // Rooms Sockets
     roomEvents.getAllRooms(socket, rooms);
     roomEvents.joinRoom(io, socket, rooms);
+    roomEvents.sendMessage(io, socket, rooms);
     roomEvents.swapTeam(io, socket, rooms);
  
     console.log('new conection established ', socket.id)
