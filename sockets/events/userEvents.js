@@ -70,8 +70,8 @@ module.exports = {
                 errorEmit.sendError(socket, {type: 'room', message: 'Room already exists'});
             } else {
                 rooms.push(newRoomCreated);
-                individualEmit.goToRoom(socket, {roomInfo: newRoomCreated, accepted: true});
                 globalEmit.newRoomCreated(io, {rooms, accepted: true});
+                individualEmit.sendUserToRoom(socket, newRoomCreated.id)
             }
         })
     },

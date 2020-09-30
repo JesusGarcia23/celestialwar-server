@@ -16,7 +16,7 @@ module.exports = {
         socket.emit('getInitialRoomData', data);
     },
 
-    goToRoom(socket, data) {
-        socket.emit('goToRoom', {user: data.player, roomInfo: data.roomInfo, accepted: data.accepted});
-    },
+    sendUserToRoom(socket, roomId) {
+        socket.emit('goToRoom', roomId);
+    }
 }
