@@ -99,5 +99,11 @@ module.exports = {
                 }
             }
         })
+    },
+
+    kickUser (io, socket, players, rooms) {
+        socket.on('kickUser', (data) => {
+            console.log(data);
+        })
     }
 }

@@ -98,6 +98,7 @@ io.on('connection', socket => {
     roomEvents.joinRoom(io, socket, rooms);
     roomEvents.sendMessage(io, socket, rooms);
     roomEvents.swapTeam(io, socket, rooms);
+    roomEvents.kickUser(io, socket, players, rooms);
  
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")
