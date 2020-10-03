@@ -96,6 +96,7 @@ io.on('connection', socket => {
     // Rooms Sockets
     roomEvents.getAllRooms(socket, rooms);
     roomEvents.joinRoom(io, socket, rooms);
+    roomEvents.leavingRoom(io, socket, rooms);
     roomEvents.sendMessage(io, socket, rooms);
     roomEvents.swapTeam(io, socket, rooms);
     roomEvents.kickUser(io, socket, players, rooms);

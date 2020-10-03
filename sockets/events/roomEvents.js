@@ -12,8 +12,7 @@ module.exports = {
 
     joinRoom (io, socket, rooms) {
         socket.on('joinRoom', (data) => {
-            console.log("CHECK THIS")
-            console.log(data)
+
             const roomToJoinIndex = rooms.findIndex(room => room.id === Number(data.roomId));
             console.log("TRYING TO JOIN ROOM: ", data.roomId);
             if (roomToJoinIndex >= 0) {
@@ -50,6 +49,44 @@ module.exports = {
             }
             else {
                 console.log("ROOM NOT FOUND");
+            }
+        })
+    },
+
+    leavingRoom (io, socket, rooms) {
+        socket.on('leaveRoom', (data) => {
+
+            console.log("LEAVING ROOM", data)
+
+            const { player, roomId } = data
+
+            // Find the room where player is located
+            let roomWherePlayerIsLocatedIndex = rooms.findIndex(room => room.id === Number(roomId));
+
+            if (roomWherePlayerIsLocatedIndex >= 0) {
+                
+                let roomToUpdate = rooms[roomWherePlayerIsLocatedIndex];
+
+                // Find the player position in "players" array inside the room object
+                let playerToRemoveIndex = roomToUpdate.players.findIndex(playerInRoom => playerInRoom.username === player.username);
+
+                let playerToRemoveIndexAngelTeam = roomToUpdate.angelTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
+
+                let playerToRemoveIndexDemonTeam = roomToUpdate.demonTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
+
+                if(playerToRemoveIndexAngelTeam >= 0) {
+                    roomToUpdate.angelTeam.splice(playerToRemoveIndexAngelTeam,1);
+                }
+
+                if (playerToRemoveIndexDemonTeam >= 0) {
+                    roomToUpdate.demonTeam.splice(playerToRemoveIndexDemonTeam,1);
+                }
+
+                roomToUpdate.players.splice(playerToRemoveIndex, 1);
+                socket.leaves(`room/${roomId}`);
+                individualEmit.userLeaveRoom(socket);
+                groupalEmit.updateRoomData(io, roomToUpdate);
+
             }
         })
     },

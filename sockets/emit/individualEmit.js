@@ -19,5 +19,9 @@ module.exports = {
     sendUserToRoom(socket, roomId) {
         socket.emit('goToRoom', roomId);
     },
-    
+
+    userLeaveRoom(socket) {
+        socket.emit('exitedRoom', true);
+    }
+
 }
