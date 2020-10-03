@@ -4,6 +4,7 @@ module.exports = {
     },
 
     userKicked(io, userSocketId, roomId) {
+        io.sockets.connected[userSocketId].leave(`room/${roomId}`);
         io.sockets.connected[userSocketId].emit('kicked', roomId);
     }
 }
