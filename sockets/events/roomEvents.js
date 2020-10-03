@@ -102,8 +102,36 @@ module.exports = {
     },
 
     kickUser (io, socket, players, rooms) {
+
         socket.on('kickUser', (data) => {
-            console.log(data);
+
+            console.log(players);
+
+            const { player, roomId } = data;
+
+            let roomToUpdateIndex = rooms.findIndex(roomToFind => roomToFind.id === roomId);
+
+            let roomToUpdate = rooms[roomToUpdateIndex];
+
+            let playerIndex = roomToUpdate.players.findIndex(playerToKick => playerToKick.username === player.username)
+
+            roomToUpdate.players.splice(playerIndex, 1);
+
+            let playerAngelTeamIndex = roomToUpdate.angelTeam.findIndex(playerToFind => playerToFind.username === player.username);
+            let playerDemonTeamIndex = roomToUpdate.demonTeam.findIndex(playerToFind => playerToFind.username === player.username);
+
+            if (playerAngelTeamIndex >= 0) {
+                roomToUpdate.angelTeam.splice(playerAngelTeamIndex, 1);
+            } else if (playerDemonTeamIndex >= 0) {
+                roomToUpdate.demonTeam.splice(playerDemonTeamIndex, 1);
+            }
+
+            let socketToKick = players[player.username];
+            console.log(socketToKick);
+
+            groupalEmit.updateRoomData(io, roomToUpdate);
+            globalEmit.userKicked(io, socketToKick.id, roomId);
+
         })
     }
 }

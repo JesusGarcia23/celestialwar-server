@@ -18,5 +18,6 @@ module.exports = {
 
     sendUserToRoom(socket, roomId) {
         socket.emit('goToRoom', roomId);
-    }
+    },
+    
 }
