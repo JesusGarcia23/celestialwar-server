@@ -21,6 +21,7 @@ module.exports = {
     },
 
     userLeaveRoom(socket) {
+        socket.leaves(`room/${roomId}`);
         socket.emit('exitedRoom', true);
     }
 

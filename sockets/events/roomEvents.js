@@ -45,7 +45,6 @@ module.exports = {
                 socket.join(`room/${actualRoom.id}`);
                 groupalEmit.updateRoomData(io, actualRoom);
                 console.log(rooms)
-                // socket.emit(`room/${data.roomId}`, "Hello World");
             }
             else {
                 console.log("ROOM NOT FOUND");
@@ -70,8 +69,10 @@ module.exports = {
                 // Find the player position in "players" array inside the room object
                 let playerToRemoveIndex = roomToUpdate.players.findIndex(playerInRoom => playerInRoom.username === player.username);
 
+                // Find the player position in "angelTeam" array inside the room object
                 let playerToRemoveIndexAngelTeam = roomToUpdate.angelTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
 
+                // Find the player position in "demonTeam" array inside the room object
                 let playerToRemoveIndexDemonTeam = roomToUpdate.demonTeam.findIndex(playerInRoom => playerInRoom.username === player.username);
 
                 if(playerToRemoveIndexAngelTeam >= 0) {
@@ -83,7 +84,6 @@ module.exports = {
                 }
 
                 roomToUpdate.players.splice(playerToRemoveIndex, 1);
-                socket.leaves(`room/${roomId}`);
                 individualEmit.userLeaveRoom(socket);
                 groupalEmit.updateRoomData(io, roomToUpdate);
 
@@ -93,7 +93,7 @@ module.exports = {
 
     sendMessage (io, socket, rooms) {
         socket.on('sendMessage', (data) => {
-            console.log(data);
+
             const {player, message, roomId } = data
 
             let actualRoomIndex = rooms.findIndex(room => room.id === roomId);
@@ -142,8 +142,6 @@ module.exports = {
 
         socket.on('kickUser', (data) => {
 
-            console.log(players);
-
             const { player, roomId } = data;
 
             let roomToUpdateIndex = rooms.findIndex(roomToFind => roomToFind.id === roomId);
@@ -159,12 +157,12 @@ module.exports = {
 
             if (playerAngelTeamIndex >= 0) {
                 roomToUpdate.angelTeam.splice(playerAngelTeamIndex, 1);
+                
             } else if (playerDemonTeamIndex >= 0) {
                 roomToUpdate.demonTeam.splice(playerDemonTeamIndex, 1);
             }
 
             let socketToKick = players[player.username];
-            console.log(socketToKick);
 
             groupalEmit.updateRoomData(io, roomToUpdate);
             globalEmit.userKicked(io, socketToKick.id, roomId);
