@@ -13,6 +13,12 @@ module.exports = {
     joinRoom (io, socket, rooms) {
         socket.on('joinRoom', (data) => {
 
+            let playerToJoin = {
+                username: data.player.username,
+                accepted: data.player.accepted,
+                isReady: false,
+            }
+
             const roomToJoinIndex = rooms.findIndex(room => room.id === Number(data.roomId));
             console.log("TRYING TO JOIN ROOM: ", data.roomId);
             if (roomToJoinIndex >= 0) {
@@ -27,7 +33,7 @@ module.exports = {
 
                 //  Check if user is already in room (so is not pushed to array again)
                 if (isUserAlreadyInRoom < 0) {
-                    actualRoom.players.push(data.player);
+                    actualRoom.players.push(playerToJoin);
 
                     let isPlayerAlreadyOnATeam = actualRoom.angelTeam.findIndex(player => player.username === data.player.username);
                     let isPlayerInDemonTeam = actualRoom.demonTeam.findIndex(player => player.username === data.player.username);
@@ -35,9 +41,9 @@ module.exports = {
                     let playerWithoutTeam = (isPlayerAlreadyOnATeam < 0) && (isPlayerInDemonTeam < 0)
 
                     if(actualRoom.angelTeam.length < 5 && actualRoom.angelTeam.length <= actualRoom.demonTeam.length && playerWithoutTeam) {
-                        actualRoom.angelTeam.push(data.player);
+                        actualRoom.angelTeam.push(playerToJoin);
                     } else if(actualRoom.demonTeam.length < 5 && actualRoom.demonTeam.length <= actualRoom.angelTeam.length && playerWithoutTeam) {
-                        actualRoom.demonTeam.push(data.player);
+                        actualRoom.demonTeam.push(playerToJoin);
                     }
 
 
@@ -138,8 +144,32 @@ module.exports = {
         })
     },
 
-    kickUser (io, socket, players, rooms) {
+    setUserReady (io, socket, rooms) {
+        socket.on('imReady', (data) => {
 
+            const { player, roomId } = data;
+            let actualRoomIndex = rooms.findIndex(room => room.id === Number(roomId));
+
+            let actualRoom = rooms[actualRoomIndex];
+
+            if (actualRoom) {
+                console.log(actualRoom)
+
+                let playerAngelTeamIndex = actualRoom.angelTeam.findIndex(playerToFind => playerToFind.username === player.username);
+                let playerDemonTeamIndex = actualRoom.demonTeam.findIndex(playerToFind => playerToFind.username === player.username);
+
+                if ( playerAngelTeamIndex >= 0 && !actualRoom.angelTeam[playerAngelTeamIndex].isReady) {
+                    actualRoom.angelTeam[playerAngelTeamIndex].isReady = true;
+                    groupalEmit.updateRoomData(io, actualRoom);
+                } else if ( playerDemonTeamIndex >= 0 && !actualRoom.demonTeam[playerDemonTeamIndex].isReady) {
+                    actualRoom.demonTeam[playerDemonTeamIndex].isReady = true;
+                    groupalEmit.updateRoomData(io, actualRoom);
+                }
+            }
+        })
+    },
+
+    kickUser (io, socket, players, rooms) {
         socket.on('kickUser', (data) => {
 
             const { player, roomId } = data;
