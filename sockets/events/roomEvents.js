@@ -169,6 +169,12 @@ module.exports = {
         })
     },
 
+    kingPositionRequested (io, socket, rooms) {
+        socket.on('requestKingPosition', (data) => {
+            const { player, roomId } = data;
+        })
+    },
+
     kickUser (io, socket, players, rooms) {
         socket.on('kickUser', (data) => {
 
@@ -198,5 +204,5 @@ module.exports = {
             globalEmit.userKicked(io, socketToKick.id, roomId);
 
         })
-    }
+    },
 }
