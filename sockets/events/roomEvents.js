@@ -17,6 +17,7 @@ module.exports = {
                 username: data.player.username,
                 accepted: data.player.accepted,
                 isReady: false,
+                requestingKingPosition: false,
             }
 
             const roomToJoinIndex = rooms.findIndex(room => room.id === Number(data.roomId));
@@ -171,7 +172,38 @@ module.exports = {
 
     kingPositionRequested (io, socket, rooms) {
         socket.on('requestKingPosition', (data) => {
-            const { player, roomId } = data;
+            const { player, roomId, side } = data;
+            console.log(data)
+
+            let actualRoomIndex = rooms.findIndex(room => room.id === Number(roomId));
+
+            let actualRoom = rooms[actualRoomIndex];
+
+            if (actualRoom) {
+                
+                switch(side) {
+                    case "angel":
+                        let playerAngelTeamIndex = actualRoom.angelTeam.findIndex(playerToFind => playerToFind.username === player.username);
+
+                        if (playerAngelTeamIndex > 0) {
+                            actualRoom.angelTeam[playerAngelTeamIndex].requestingKingPosition = true;
+                            groupalEmit.updateRoomData(io, actualRoom);
+                        }
+                        break;
+                    
+                    case "demon":
+                        let playerDemonTeamIndex = actualRoom.demonTeam.findIndex(playerToFind => playerToFind.username === player.username);
+
+                        if (playerDemonTeamIndex > 0) {
+                            actualRoom.demonTeam[playerDemonTeamIndex].requestingKingPosition = true;
+                            groupalEmit.updateRoomData(io, actualRoom);
+                        }
+                        break;
+
+                    default:
+                        return;
+                }
+            }
         })
     },
 
