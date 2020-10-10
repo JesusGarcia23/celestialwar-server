@@ -101,6 +101,7 @@ io.on('connection', socket => {
     roomEvents.swapTeam(io, socket, rooms);
     roomEvents.setUserReady(io, socket, rooms);
     roomEvents.kingPositionRequested(io, socket, rooms);
+    roomEvents.kingPositionAccepted(io, socket, rooms);
     roomEvents.kickUser(io, socket, players, rooms);
  
     console.log('new conection established ', socket.id)

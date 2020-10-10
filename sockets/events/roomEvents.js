@@ -207,6 +207,12 @@ module.exports = {
         })
     },
 
+    kingPositionAccepted (io, socket, rooms) {
+        socket.on('acceptNewKing', (data) => {
+            console.log(data);
+        })
+    },
+
     kickUser (io, socket, players, rooms) {
         socket.on('kickUser', (data) => {
 
