@@ -133,12 +133,12 @@ module.exports = {
 
                 if (playerAngelTeamIndex >= 0 && actualRoom.demonTeam.length < 5) {
                     actualRoom.angelTeam.splice(playerAngelTeamIndex, 1);
-                    actualRoom.demonTeam.push({username: player.username, accepted: player.accepted});
+                    actualRoom.demonTeam.push({username: player.username, accepted: player.accepted, requestingKingPosition: false});
                     groupalEmit.updateRoomData(io, actualRoom);
 
                 } else if (playerDemonTeamIndex >= 0 && actualRoom.angelTeam.length < 5) {
                     actualRoom.demonTeam.splice(playerDemonTeamIndex, 1);
-                    actualRoom.angelTeam.push({username: player.username, accepted: player.accepted});
+                    actualRoom.angelTeam.push({username: player.username, accepted: player.accepted, requestingKingPosition: false});
                     groupalEmit.updateRoomData(io, actualRoom);
                 }
             }
@@ -209,7 +209,55 @@ module.exports = {
 
     kingPositionAccepted (io, socket, rooms) {
         socket.on('acceptNewKing', (data) => {
-            console.log(data);
+
+            const { myUser, playerToChange, roomId, side } = data
+
+            let actualRoomIndex = rooms.findIndex(room => room.id === Number(roomId));
+
+            let actualRoom = rooms[actualRoomIndex];
+
+            if (actualRoom) {
+
+                console.log("ROOM FOUND")
+
+                console.log(actualRoom);
+
+                switch(side) {
+                    case "angel":
+                        console.log("ANGEL TEAM NEW KING!")
+                        let newAngelKingIndex = actualRoom.angelTeam.findIndex(playerToFind => playerToFind.username === playerToChange);
+
+                        let currentAngelKingIndex = actualRoom.angelTeam.findIndex(playerToFind => playerToFind.username === myUser);
+
+                        if (newAngelKingIndex > 0 && currentAngelKingIndex === 0) {
+                            console.log("THIS HAPPENED!")
+                            let oldAngelKing = actualRoom.angelTeam[currentAngelKingIndex];
+                            actualRoom.angelTeam[currentAngelKingIndex] = actualRoom.angelTeam[newAngelKingIndex];
+                            actualRoom.angelTeam[currentAngelKingIndex].requestingKingPosition = false;
+                            actualRoom.angelTeam[newAngelKingIndex] = oldAngelKing;
+                            groupalEmit.updateRoomData(io, actualRoom);
+                        }
+                        break;
+                    
+                    case "demon":
+                        let newDemonKingIndex = actualRoom.demonTeam.findIndex(playerToFind => playerToFind.username === playerToChange.username);
+
+                        let currentDemonKingIndex = actualRoom.demonTeam.findIndex(playerToFind => playerToFind.username === myUser);
+
+                        if (newDemonKingIndex > 0 && currentDemonKingIndex === 0) {
+                            let oldDemonKing = actualRoom.demonTeam[currentDemonKingIndex];
+                            actualRoom.demonTeam[currentDemonKingIndex] = actualRoom.demonTeam[newDemonKingIndex];
+                            actualRoom.demonTeam[currentDemonKingIndex].requestingKingPosition = false;
+                            actualRoom.demonTeam[newDemonKingIndex] = oldDemonKing;
+                            groupalEmit.updateRoomData(io, actualRoom);
+                        }
+                        break;
+
+                    default:
+                        return;
+                }
+
+            }
         })
     },
 
