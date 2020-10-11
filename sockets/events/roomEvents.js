@@ -291,4 +291,20 @@ module.exports = {
 
         })
     },
+
+    startGame (io, socket, rooms) {
+        socket.on('startGame', (data) => {
+            console.log(data)
+
+            const {player, roomId} = data;
+
+            let actualRoomIndex = rooms.findIndex(room => room.id === Number(roomId));
+
+            let actualRoom = rooms[actualRoomIndex];
+
+            if (actualRoom && actualRoom.host === player) {
+                console.log("STARTING GAME")
+            }
+        })
+    }
 }

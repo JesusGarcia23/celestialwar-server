@@ -103,6 +103,7 @@ io.on('connection', socket => {
     roomEvents.kingPositionRequested(io, socket, rooms);
     roomEvents.kingPositionAccepted(io, socket, rooms);
     roomEvents.kickUser(io, socket, players, rooms);
+    roomEvents.startGame(io, socket, rooms);
  
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")
