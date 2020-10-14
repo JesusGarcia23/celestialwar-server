@@ -303,7 +303,8 @@ module.exports = {
             let actualRoom = rooms[actualRoomIndex];
 
             if (actualRoom && actualRoom.host === player) {
-                console.log("STARTING GAME")
+                actualRoom.gameStarted = true;
+                groupalEmit.updateRoomData(io, actualRoom);
             }
         })
     }

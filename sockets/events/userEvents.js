@@ -59,9 +59,8 @@ module.exports = {
                 settings: {
                     "map": "forest"
                 },
-                map: "forest",
-                messages: []
-        
+                messages: [],
+                gameStatus: {}
             }
     
             let roomExists = rooms.findIndex(room => room.name === newRoom.roomName);

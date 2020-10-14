@@ -3,6 +3,7 @@ const http = require('http');
 const socketIo = require("socket.io");
 const userEvents = require('./sockets/events/userEvents');
 const roomEvents = require('./sockets/events/roomEvents');
+const gameEvents = require('./sockets/events/gameEvents');
 
 let app = express(), io;
 const server = http.createServer(app)
@@ -56,32 +57,6 @@ let rooms = [
     }
 ];
 
-let listGameStatus = [
-    {
-        id: 0,
-        players: [
-            {
-                name: "",
-                side: "",
-                x: 0,
-                y: 0,
-                alive: true,
-                modeWarrior: false,
-                sphereGrabbed: false,
-                king: false,
-            }
-        ],
-        demonTeam: {
-            kills: 0,
-            containersFilled: 0,
-        },
-        angelTeam: {
-            kills: 0,
-            containersFilled: 0,
-        },
-        map: "",
-    }
-]
 
 // SOCKET HERE
 io = socketIo(server)
@@ -104,6 +79,9 @@ io.on('connection', socket => {
     roomEvents.kingPositionAccepted(io, socket, rooms);
     roomEvents.kickUser(io, socket, players, rooms);
     roomEvents.startGame(io, socket, rooms);
+
+    // Game Sockets
+    gameEvents.getGameStatus(io, socket, rooms);
  
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")
