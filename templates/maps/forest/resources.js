@@ -1,4 +1,4 @@
-export let listOfPlatforms = [
+export let forestPlatForms = [
     {
         name: 'base',
         type: 'platform',

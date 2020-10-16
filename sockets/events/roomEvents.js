@@ -1,6 +1,7 @@
 const globalEmit = require('../emit/globalEmit');
 const groupalEmit = require('../emit/groupalEmit');
 const individualEmit = require('../emit/individualEmit');
+const gameStatusCreator = require('../../utils/gameStatusCreator');
 
 module.exports = {
 
@@ -21,10 +22,10 @@ module.exports = {
             }
 
             const roomToJoinIndex = rooms.findIndex(room => room.id === Number(data.roomId));
-            console.log("TRYING TO JOIN ROOM: ", data.roomId);
+
             if (roomToJoinIndex >= 0) {
                 let actualRoom = rooms[roomToJoinIndex];
-                console.log("JOINING TO ROOM: ", data);
+
                 let isUserAlreadyInRoom = actualRoom.players.findIndex(player => player.username === data.player.username);
 
                 //  Check for room max capacity
@@ -51,7 +52,6 @@ module.exports = {
                 }
                 socket.join(`room/${actualRoom.id}`);
                 groupalEmit.updateRoomData(io, actualRoom);
-                console.log(rooms)
             }
             else {
                 console.log("ROOM NOT FOUND");
@@ -61,8 +61,6 @@ module.exports = {
 
     leavingRoom (io, socket, rooms) {
         socket.on('leaveRoom', (data) => {
-
-            console.log("LEAVING ROOM", data)
 
             const { player, roomId } = data
 
@@ -120,7 +118,7 @@ module.exports = {
 
     swapTeam (io, socket, rooms) {
         socket.on('swapTeam', (data) => {
-            console.log("SWAPING TEAM...")
+
             const {player, roomId} = data;
 
             let actualRoomIndex = rooms.findIndex(room => room.id === roomId);
@@ -154,7 +152,6 @@ module.exports = {
             let actualRoom = rooms[actualRoomIndex];
 
             if (actualRoom) {
-                console.log(actualRoom)
 
                 let playerAngelTeamIndex = actualRoom.angelTeam.findIndex(playerToFind => playerToFind.username === player.username);
                 let playerDemonTeamIndex = actualRoom.demonTeam.findIndex(playerToFind => playerToFind.username === player.username);
@@ -173,7 +170,6 @@ module.exports = {
     kingPositionRequested (io, socket, rooms) {
         socket.on('requestKingPosition', (data) => {
             const { player, roomId, side } = data;
-            console.log(data)
 
             let actualRoomIndex = rooms.findIndex(room => room.id === Number(roomId));
 
@@ -218,19 +214,13 @@ module.exports = {
 
             if (actualRoom) {
 
-                console.log("ROOM FOUND")
-
-                console.log(actualRoom);
-
                 switch(side) {
                     case "angel":
-                        console.log("ANGEL TEAM NEW KING!")
                         let newAngelKingIndex = actualRoom.angelTeam.findIndex(playerToFind => playerToFind.username === playerToChange);
 
                         let currentAngelKingIndex = actualRoom.angelTeam.findIndex(playerToFind => playerToFind.username === myUser);
 
                         if (newAngelKingIndex > 0 && currentAngelKingIndex === 0) {
-                            console.log("THIS HAPPENED!")
                             let oldAngelKing = actualRoom.angelTeam[currentAngelKingIndex];
                             actualRoom.angelTeam[currentAngelKingIndex] = actualRoom.angelTeam[newAngelKingIndex];
                             actualRoom.angelTeam[currentAngelKingIndex].requestingKingPosition = false;
@@ -294,7 +284,6 @@ module.exports = {
 
     startGame (io, socket, rooms) {
         socket.on('startGame', (data) => {
-            console.log(data)
 
             const {player, roomId} = data;
 
@@ -303,7 +292,18 @@ module.exports = {
             let actualRoom = rooms[actualRoomIndex];
 
             if (actualRoom && actualRoom.host === player) {
+
+                const { settings, angelTeam, demonTeam } = actualRoom;
                 actualRoom.gameStarted = true;
+
+                let newGameStatus = gameStatusCreator.createGameStatus(settings, angelTeam, demonTeam);
+
+                console.log("CREATING NEW GAME STATUS")
+                console.log(" HOOPA ",newGameStatus);
+
+                //  create game status here
+
+
                 groupalEmit.updateRoomData(io, actualRoom);
             }
         })
