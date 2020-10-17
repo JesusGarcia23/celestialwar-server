@@ -1,9 +1,24 @@
-const forestMap = require('../templates/maps/forest/resources');
+import { Resource } from '../models/Resource';
+import { generateResources } from '../utils/levelCreator';
+import { generatePlayers } from '../utils/playerCreator';
+import { forestPlatForms } from '../templates/maps/forest/resources';
 
-module.exports = {
-    createGameStatus (settings, angelTeam, demonTeam) {
+
+ export const createGameStatus = (settings, angelTeam, demonTeam) => {
         console.log("CREATE GAME STATUS")
         console.log(settings);
-        console.log(forestMap);
+        let newGameStatus = {};
+        let map = [];
+        let players = generatePlayers([...angelTeam, ...demonTeam]);
+
+        switch(settings.map) {
+            case 'forest': 
+                map = generateResources(forestPlatForms);
+                break;
+            default:
+                return;
+        }
+
+        console.log(players);
+        // console.log(players)
     }
-}

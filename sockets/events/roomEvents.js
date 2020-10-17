@@ -1,7 +1,8 @@
+import { createGameStatus } from '../../utils/gameStatusCreator';
+
 const globalEmit = require('../emit/globalEmit');
 const groupalEmit = require('../emit/groupalEmit');
 const individualEmit = require('../emit/individualEmit');
-const gameStatusCreator = require('../../utils/gameStatusCreator');
 
 module.exports = {
 
@@ -296,7 +297,7 @@ module.exports = {
                 const { settings, angelTeam, demonTeam } = actualRoom;
                 actualRoom.gameStarted = true;
 
-                let newGameStatus = gameStatusCreator.createGameStatus(settings, angelTeam, demonTeam);
+                let newGameStatus = createGameStatus(settings, angelTeam, demonTeam);
 
                 console.log("CREATING NEW GAME STATUS")
                 console.log(" HOOPA ",newGameStatus);

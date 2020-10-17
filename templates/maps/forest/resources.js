@@ -1,4 +1,4 @@
-export let forestPlatForms = [
+export const forestPlatForms = [
     {
         name: 'base',
         type: 'platform',
