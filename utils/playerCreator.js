@@ -1,20 +1,25 @@
-import { Angel, Demon, King } from '../models/Character';
+import { Angel, Demon, King, defaultAngelValues, defaultDemonValues } from '../models/Character';
 
-export const generatePlayers = (listOfPlayers) => {
-    console.log(listOfPlayers)
-    return listOfPlayers.map(player => {
-        switch(player.type){
-            case "Angel": {
-                return new Angel(player.name, player.x, player.y, player.width, player.height, player.sprite, player.direction, player.deployX, player.deployY);
-            }
-            case "Demon": {
-                return new Demon(player.name, player.x, player.y, player.width, player.height, player.sprite, player.direction, player.deployX, player.deployY);
-            }
-            case "Archangel": {
-                return new King(player.name, player.x, player.y, player.width, player.height, player.sprite, player.direction, player.deployX, player.deployY);
-            }
-            default: 
-                break;
+export const generatePlayers = (angelTeam, demonTeam) => {
+
+    let newAngelTeam = angelTeam.map((player, index) => {
+        if (index === 0) {
+            return new King(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "angel");
+        } else {
+            return new Angel(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "angel");
         }
     })
+
+    let newDemonTeam = demonTeam.map((player, index) => {
+        if (index === 0) {
+            return new Demon(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "demon");
+        } else {
+            return new Angel(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "demon");
+        }
+    })
+
+    let playersToPlay = [...newAngelTeam, ...newDemonTeam];
+
+    return playersToPlay;
+
 }

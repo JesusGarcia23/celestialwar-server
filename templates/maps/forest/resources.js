@@ -492,3 +492,7 @@ export const forestPlatForms = [
     },
     
 ];
+
+export const forestSpheres = [
+    
+]
