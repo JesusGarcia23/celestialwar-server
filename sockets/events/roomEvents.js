@@ -300,8 +300,8 @@ module.exports = {
                 let newGameStatus = createGameStatus(settings, angelTeam, demonTeam);
 
                 console.log("CREATING NEW GAME STATUS")
-                console.log(" HOOPA ",newGameStatus);
-
+                console.log(" HOOPA ", newGameStatus);
+                actualRoom.gameStatus = newGameStatus;
                 //  create game status here
 
 

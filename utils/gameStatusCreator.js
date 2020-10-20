@@ -24,6 +24,6 @@ import { forestPlatForms, forestSpheres } from '../templates/maps/forest/resourc
             map,
         };
 
-        console.log(newGameStatus)
+        return newGameStatus;
 
     }
