@@ -1,3 +1,5 @@
+const individualEmit = require('../emit/individualEmit');
+
 module.exports = {
 
     getGameStatus (io, socket, rooms) {
@@ -10,9 +12,8 @@ module.exports = {
             let actualRoom = rooms[actualRoomIndex];
 
             if (actualRoom && actualRoom.players.findIndex(player => player.username === player.username) >= 0) {
-                console.log("GAME FOUND");
                 const { settings, angelTeam, demonTeam, gameStatus } = actualRoom;
-                console.log(settings)
+                individualEmit.getInitialGameStatus(socket, gameStatus)
 
 
             }

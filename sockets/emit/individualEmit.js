@@ -23,6 +23,12 @@ module.exports = {
     userLeaveRoom(socket) {
         socket.leaves(`room/${roomId}`);
         socket.emit('exitedRoom', true);
+    },
+
+    // Game Emit
+
+    getInitialGameStatus(socket, data){
+        socket.emit('getGameStatus', data);
     }
 
 }
