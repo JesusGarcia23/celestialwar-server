@@ -12,10 +12,8 @@ module.exports = {
             let actualRoom = rooms[actualRoomIndex];
 
             if (actualRoom && actualRoom.players.findIndex(player => player.username === player.username) >= 0) {
-                const { settings, angelTeam, demonTeam, gameStatus } = actualRoom;
+                const { settings, gameStatus } = actualRoom;
                 individualEmit.getInitialGameStatus(socket, gameStatus)
-
-
             }
         })
     },
