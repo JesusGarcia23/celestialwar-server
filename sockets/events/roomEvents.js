@@ -297,13 +297,11 @@ module.exports = {
                 const { settings, angelTeam, demonTeam } = actualRoom;
                 actualRoom.gameStarted = true;
 
-                let newGameStatus = createGameStatus(settings, angelTeam, demonTeam);
-
-                console.log("CREATING NEW GAME STATUS")
-                console.log(" HOOPA ", newGameStatus);
-                actualRoom.gameStatus = newGameStatus;
                 //  create game status here
 
+                let newGameStatus = createGameStatus(settings, angelTeam, demonTeam);
+
+                actualRoom.gameStatus = newGameStatus;
 
                 groupalEmit.updateRoomData(io, actualRoom);
             }

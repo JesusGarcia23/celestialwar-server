@@ -44,8 +44,7 @@ export class Sphere {
 
 //  Spheres will be re generated (NOT IMPLEMENTED YET) !!!!!!!!!!!!!!!
 export class SphereGenerator {
-    constructor(canvas, name, type, x, y){
-        this.canvas = canvas;
+    constructor(name, type, x, y){
         this.name = name;
         this.type = type;
         this.x = x;
