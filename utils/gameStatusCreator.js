@@ -21,6 +21,7 @@ import { forestPlatForms, forestSpheres } from '../templates/maps/forest/resourc
 
         let newGameStatus = {
             players,
+            spheres,
             map,
         };
 

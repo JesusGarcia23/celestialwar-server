@@ -12,9 +12,9 @@ export const generatePlayers = (angelTeam, demonTeam) => {
 
     let newDemonTeam = demonTeam.map((player, index) => {
         if (index === 0) {
-            return new Demon(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "demon");
+            return new King(player.username, defaultDemonValues[index].x, defaultDemonValues[index].y, defaultDemonValues[index].width, defaultDemonValues[index].height, defaultDemonValues[index].sprite, defaultDemonValues[index].direction, defaultDemonValues[index].deployX, defaultDemonValues[index].deployY, "demon");
         } else {
-            return new Angel(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "demon");
+            return new Demon(player.username, defaultDemonValues[index].x, defaultDemonValues[index].y, defaultDemonValues[index].width, defaultDemonValues[index].height, defaultDemonValues[index].sprite, defaultDemonValues[index].direction, defaultDemonValues[index].deployX, defaultDemonValues[index].deployY, "demon");
         }
     })
 

@@ -274,17 +274,17 @@ export class King extends General {
 }
 
 export const defaultAngelValues = [
-    {x: 40, y: 0, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 40, deployY: 0 },
-    {x: 43, y: 0, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 43, deployY: 0 },
-    {x: 45, y: 0, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 45, deployY: 0 },
-    {x: 47, y: 0, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 47, deployY: 0 },
-    {x: 49, y: 0, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 49, deployY: 0 },
+    {x: 40, y: 15, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 40, deployY: 10 },
+    {x: 43, y: 15, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 43, deployY: 10 },
+    {x: 45, y: 15, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 45, deployY: 10 },
+    {x: 47, y: 15, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 47, deployY: 10 },
+    {x: 49, y: 15, width: 1.2, height: 5, sprite: "A", direction: 'RIGHT', deployX: 49, deployY: 10 },
 ]
 
 export const defaultDemonValues = [
-    {x: 53, y: 0, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 53, deployY: 0 },
-    {x: 55, y: 0, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 55, deployY: 0 },
-    {x: 57, y: 0, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 57, deployY: 0 },
-    {x: 59, y: 0, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 59, deployY: 0 },
-    {x: 61, y: 0, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 61, deployY: 0 },
+    {x: 53, y: 15, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 53, deployY: 10 },
+    {x: 55, y: 15, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 55, deployY: 10 },
+    {x: 57, y: 15, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 57, deployY: 10 },
+    {x: 59, y: 15, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 59, deployY: 10 },
+    {x: 61, y: 15, width: 1.2, height: 5, sprite: "B", direction: 'RIGHT', deployX: 61, deployY: 10 },
 ]
