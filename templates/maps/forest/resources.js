@@ -6,10 +6,8 @@ export const forestPlatForms = [
         width: 100,
         height: 10,
         x: 0,
-        y: 20,
+        y: 90,
         color: 'brown',
-        xPreference: 'center',
-        yPreference: 'end'
     },
     {
         name: 'collector-base',
@@ -17,11 +15,9 @@ export const forestPlatForms = [
         id: 2,
         width: 35,
         height: 3,
-        x: 0,
+        x: 32.5,
         y: 20,
         color: 'green',
-        xPreference: 'center',
-        yPreference: null
     },
     {
         name: 'collector-base-separator',
@@ -29,11 +25,9 @@ export const forestPlatForms = [
         id: 3,
         width: 1,
         height: 20,
-        x: 0,
+        x: 49.5,
         y: 0,
         color: 'green',
-        xPreference: 'center',
-        yPreference: null
     },
     {
         name: 'regular-platform',
@@ -43,7 +37,6 @@ export const forestPlatForms = [
         height: 3,
         x:0,
         y: 75,
-        xPreference: 'start',
         color: 'green'
     },
     {
@@ -54,7 +47,6 @@ export const forestPlatForms = [
         height: 3,
         x:0,
         y: 75,
-        xPreference: 'end',
         color: 'green'
     },
     {
@@ -65,7 +57,6 @@ export const forestPlatForms = [
         height: 3,
         x:0,
         y: 75,
-        xPreference: 'center',
         color: 'green'
     },
     {
@@ -97,7 +88,6 @@ export const forestPlatForms = [
         height: 3,
         x: 40,
         y: 60,
-        xPreference: 'start',
         color: 'green'
     },
     {
@@ -128,7 +118,6 @@ export const forestPlatForms = [
         height: 3,
         x: 5,
         y: 60,
-        xPreference: 'end',
         color: 'green'
     },
 
@@ -183,7 +172,6 @@ export const forestPlatForms = [
         height: 3,
         x: 80,
         y: 30,
-        xPreference: 'end',
         color: 'green'
     },
     {
@@ -194,7 +182,6 @@ export const forestPlatForms = [
         height: 3,
         x: 80,
         y: 30,
-        xPreference: 'start',
         color: 'green'
     },
     //SEVENTH ROW

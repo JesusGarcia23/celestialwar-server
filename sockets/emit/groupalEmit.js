@@ -6,6 +6,10 @@ module.exports = {
 
     // Emits for game
     sendGameStatus (io, data) {
-        io.in(`battlefield/${data.id}`).emit('getGameStatus', data);
+        io.in(`room/${data.id}`).emit('getGameStatus', data);
+    },
+
+    updateGameStatus (io, data) {
+        io.in(`room/${data.id}`).emit('updateGameStatus', data);
     }
 }
