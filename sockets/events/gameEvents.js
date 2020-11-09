@@ -28,6 +28,7 @@ module.exports = {
                     for (let j = 0; j <= actualRoom.gameStatus.players.length - 1; j++) {
 
                         if (actualRoom.gameStatus.players[j].name === user.username) {
+                            socket.join(`room/${actualRoom.id}`);
                             groupalEmit.updateGameStatus(io, actualRoom);
                             break;
                         }
