@@ -21,7 +21,7 @@ class General {
         this.clashing = false;
         this.powerJump = 20;
         this.totalJumped = 0;
-        this.onFloor = false;
+        this.onFloor = true;
         this.kills = 0;
     }
 

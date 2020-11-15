@@ -60,7 +60,12 @@ module.exports = {
                                 case "RIGHT":
                                     actualRoom.gameStatus.players[j].x += moveAmount;
                                     break;
-
+                                case "UP":
+                                    actualRoom.gameStatus.players[j].onFloor = false;
+                                    actualRoom.gameStatus.players[j].y -= moveAmount;
+                                    break;
+                                case "DOWN":
+                                    actualRoom.gameStatus.players[j].y += moveAmount;
                                 default:
                                     break;
                             }

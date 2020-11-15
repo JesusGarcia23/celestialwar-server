@@ -35,7 +35,7 @@ export const forestPlatForms = [
         id: 4,
         width: 12,
         height: 3,
-        x:0,
+        x: 0,
         y: 75,
         color: 'green'
     },
@@ -45,7 +45,7 @@ export const forestPlatForms = [
         id: 5,
         width: 12,
         height: 3,
-        x:0,
+        x: 88,
         y: 75,
         color: 'green'
     },
@@ -55,7 +55,7 @@ export const forestPlatForms = [
         id: 6,
         width: 15,
         height: 3,
-        x:0,
+        x: 42,
         y: 75,
         color: 'green'
     },
@@ -86,7 +86,7 @@ export const forestPlatForms = [
         id: 9,
         width: 5,
         height: 3,
-        x: 40,
+        x: 0,
         y: 60,
         color: 'green'
     },
@@ -116,7 +116,7 @@ export const forestPlatForms = [
         id: 12,
         width: 5,
         height: 3,
-        x: 5,
+        x: 95,
         y: 60,
         color: 'green'
     },
@@ -170,7 +170,7 @@ export const forestPlatForms = [
         id: 17,
         width: 7,
         height: 3,
-        x: 80,
+        x: 93,
         y: 30,
         color: 'green'
     },
@@ -180,7 +180,7 @@ export const forestPlatForms = [
         id: 18,
         width: 7,
         height: 3,
-        x: 80,
+        x: 0,
         y: 30,
         color: 'green'
     },
