@@ -52,12 +52,14 @@ module.exports = {
                     for (let j = 0; j <= actualRoom.gameStatus.players.length - 1; j++) {
 
                         if (actualRoom.gameStatus.players[j].name === player.name) {
-                            actualRoom.gameStatus.players[j].direction = direction;
+                            
                             switch (direction) {
                                 case "LEFT": 
+                                    actualRoom.gameStatus.players[j].direction = direction;
                                     actualRoom.gameStatus.players[j].x -= moveAmount;
                                     break;
                                 case "RIGHT":
+                                    actualRoom.gameStatus.players[j].direction = direction;
                                     actualRoom.gameStatus.players[j].x += moveAmount;
                                     break;
                                 case "UP":

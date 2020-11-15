@@ -206,6 +206,16 @@ export const forestPlatForms = [
         color: 'green'
     },
     {
+        name: 'regular-platform',
+        type: 'platform',
+        id: 21,
+        width: 9,
+        height: 3,
+        x: 14,
+        y: 89,
+        color: 'purple'
+    },
+    {
         name: 'sphere container generator 1',
         type: 'sphere-generator',
         x: 1.5,

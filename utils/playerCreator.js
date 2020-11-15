@@ -4,17 +4,81 @@ export const generatePlayers = (angelTeam, demonTeam) => {
 
     let newAngelTeam = angelTeam.map((player, index) => {
         if (index === 0) {
-            return new King(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "angel");
+            return {
+                name: player.username, 
+                x: defaultAngelValues[index].x, 
+                y: defaultAngelValues[index].y, 
+                width: defaultAngelValues[index].width, 
+                height: defaultAngelValues[index].height, 
+                direction: defaultAngelValues[index].direction,
+                deployX: defaultAngelValues[index].deployX, 
+                deployY: defaultAngelValues[index].deployY, 
+                side: "angel",
+                alive: true,
+                sphereGrabbed: false,
+                onFloor: true,
+                king: true,
+                kills: 0,
+                modeWarrior: true,
+            }
         } else {
-            return new Angel(player.username, defaultAngelValues[index].x, defaultAngelValues[index].y, defaultAngelValues[index].width, defaultAngelValues[index].height, defaultAngelValues[index].sprite, defaultAngelValues[index].direction, defaultAngelValues[index].deployX, defaultAngelValues[index].deployY, "angel");
+            return {
+                name: player.username, 
+                x: defaultAngelValues[index].x, 
+                y: defaultAngelValues[index].y, 
+                width: defaultAngelValues[index].width, 
+                height: defaultAngelValues[index].height, 
+                direction: defaultAngelValues[index].direction,
+                deployX: defaultAngelValues[index].deployX, 
+                deployY: defaultAngelValues[index].deployY, 
+                side: "angel",
+                alive: true,
+                sphereGrabbed: false,
+                onFloor: true,
+                king: false,
+                kills: 0,
+                modeWarrior: false,
+            }
         }
     })
 
     let newDemonTeam = demonTeam.map((player, index) => {
         if (index === 0) {
-            return new King(player.username, defaultDemonValues[index].x, defaultDemonValues[index].y, defaultDemonValues[index].width, defaultDemonValues[index].height, defaultDemonValues[index].sprite, defaultDemonValues[index].direction, defaultDemonValues[index].deployX, defaultDemonValues[index].deployY, "demon");
+            return {
+                name: player.username, 
+                x: defaultDemonValues[index].x, 
+                y: defaultDemonValues[index].y, 
+                width: defaultDemonValues[index].width, 
+                height: defaultDemonValues[index].height, 
+                direction: defaultDemonValues[index].direction,
+                deployX: defaultDemonValues[index].deployX, 
+                deployY: defaultDemonValues[index].deployY, 
+                side: "demon",
+                alive: true,
+                sphereGrabbed: false,
+                onFloor: true,
+                king: true,
+                kills: 0,
+                modeWarrior: true,
+            }
         } else {
-            return new Demon(player.username, defaultDemonValues[index].x, defaultDemonValues[index].y, defaultDemonValues[index].width, defaultDemonValues[index].height, defaultDemonValues[index].sprite, defaultDemonValues[index].direction, defaultDemonValues[index].deployX, defaultDemonValues[index].deployY, "demon");
+            return {
+                name: player.username, 
+                x: defaultDemonValues[index].x, 
+                y: defaultDemonValues[index].y, 
+                width: defaultDemonValues[index].width, 
+                height: defaultDemonValues[index].height, 
+                direction: defaultDemonValues[index].direction,
+                deployX: defaultDemonValues[index].deployX, 
+                deployY: defaultDemonValues[index].deployY, 
+                side: "demon",
+                alive: true,
+                sphereGrabbed: false,
+                onFloor: true,
+                king: false,
+                kills: 0,
+                modeWarrior: false,
+            }
         }
     })
 
@@ -22,4 +86,4 @@ export const generatePlayers = (angelTeam, demonTeam) => {
 
     return playersToPlay;
 
-}
+};
