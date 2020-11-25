@@ -85,5 +85,12 @@ module.exports = {
             }
 
         })
+    },
+
+    playerGrabbedSphere (io, socket, rooms ) {
+        socket.on('playerGrabbedSphere', (data) => {
+            console.log("SPHERE TOUCHED");
+            console.log(data)
+        })
     }
 } 
