@@ -31,7 +31,7 @@ export const generatePlatforms = (listOfPlatforms) => {
 export const generateSpheres = (listOfSpheres) => {
 
     return listOfSpheres.map(sphereToCreate => {
-        return new Sphere(sphereToCreate.radius, sphereToCreate.x, sphereToCreate.y, sphereToCreate.color)
+        return new Sphere(sphereToCreate.id, sphereToCreate.radius, sphereToCreate.x, sphereToCreate.y, sphereToCreate.color)
     })
 
 }

@@ -1,7 +1,8 @@
 // Regular Spheres
 
 export class Sphere {
-    constructor(radius, x, y){
+    constructor(id, radius, x, y) {
+        this.id = id;
         this.radius = radius;
         this.x = x;
         this.y = y;
