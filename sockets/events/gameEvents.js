@@ -89,8 +89,44 @@ module.exports = {
 
     playerGrabbedSphere (io, socket, rooms ) {
         socket.on('playerGrabbedSphere', (data) => {
-            console.log("SPHERE TOUCHED");
-            console.log(data)
+
+            const { player, sphere, roomId } = data;
+            let updatedActualRoom = null;
+
+            if (!player.sphereGrabbed) {
+                
+            for (let i = 0; i <= rooms.length - 1; i++) {
+                if (rooms[i].id === Number(roomId)) {
+
+                    let actualRoom = rooms[i]; 
+
+                    let sphereToGrabIndex = actualRoom.gameStatus.spheres.findIndex(sphereToFind => sphereToFind.id === sphere.id);
+
+                    let sphereToGrab = null;
+
+                    if (sphereToGrabIndex >= 0) {
+                        sphereToGrab = actualRoom.gameStatus.spheres[sphereToGrabIndex];
+                    }
+
+                    for (let j = 0; j <= actualRoom.gameStatus.players.length - 1; j++) {
+
+                        if (actualRoom.gameStatus.players[j].name === player.name && !actualRoom.gameStatus.players[j].sphereGrabbed 
+                            && sphereToGrab && sphereToGrab.grabbedBy === "") {
+                            actualRoom.gameStatus.spheres[sphereToGrabIndex] = player.name;
+                            actualRoom.gameStatus.players[j].sphereGrabbed = true;
+                            break;
+                        }
+
+                    }
+    
+                    updatedActualRoom = actualRoom;  
+
+                    groupalEmit.updateGameStatus(io, updatedActualRoom);
+                    break;
+                }
+            }
+            }
+
         })
     }
 } 
