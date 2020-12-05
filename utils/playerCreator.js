@@ -59,7 +59,7 @@ export const generatePlayers = (angelTeam, demonTeam) => {
                 onFloor: true,
                 king: true,
                 kills: 0,
-                modeWarrior: false,
+                modeWarrior: true,
             }
         } else {
             return {
