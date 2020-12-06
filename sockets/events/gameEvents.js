@@ -128,5 +128,12 @@ module.exports = {
             }
 
         })
+    },
+
+    playerAttack (io, socket, rooms) {
+        socket.on('playerAttacked', (data) => {
+            console.log(data);
+        })
+
     }
 } 
