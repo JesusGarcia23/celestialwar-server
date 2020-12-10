@@ -95,36 +95,36 @@ module.exports = {
 
             if (!player.sphereGrabbed) {
                 
-            for (let i = 0; i <= rooms.length - 1; i++) {
-                if (rooms[i].id === Number(roomId)) {
+                for (let i = 0; i <= rooms.length - 1; i++) {
+                    if (rooms[i].id === Number(roomId)) {
 
-                    let actualRoom = rooms[i]; 
+                        let actualRoom = rooms[i]; 
 
-                    let sphereToGrabIndex = actualRoom.gameStatus.spheres.findIndex(sphereToFind => sphereToFind.id === sphere.id);
+                        let sphereToGrabIndex = actualRoom.gameStatus.spheres.findIndex(sphereToFind => sphereToFind.id === sphere.id);
 
-                    let sphereToGrab = null;
+                        let sphereToGrab = null;
 
-                    if (sphereToGrabIndex >= 0) {
-                        sphereToGrab = actualRoom.gameStatus.spheres[sphereToGrabIndex];
-                    }
-
-                    for (let j = 0; j <= actualRoom.gameStatus.players.length - 1; j++) {
-
-                        if (actualRoom.gameStatus.players[j].name === player.name && !actualRoom.gameStatus.players[j].sphereGrabbed 
-                            && sphereToGrab && sphereToGrab.grabbedBy === "") {
-                            actualRoom.gameStatus.spheres[sphereToGrabIndex] = player.name;
-                            actualRoom.gameStatus.players[j].sphereGrabbed = true;
-                            break;
+                        if (sphereToGrabIndex >= 0) {
+                            sphereToGrab = actualRoom.gameStatus.spheres[sphereToGrabIndex];
                         }
 
-                    }
-    
-                    updatedActualRoom = actualRoom;  
+                        for (let j = 0; j <= actualRoom.gameStatus.players.length - 1; j++) {
 
-                    groupalEmit.updateGameStatus(io, updatedActualRoom);
-                    break;
+                            if (actualRoom.gameStatus.players[j].name === player.name && !actualRoom.gameStatus.players[j].sphereGrabbed 
+                                && sphereToGrab && sphereToGrab.grabbedBy === "") {
+                                actualRoom.gameStatus.spheres[sphereToGrabIndex] = player.name;
+                                actualRoom.gameStatus.players[j].sphereGrabbed = true;
+                                break;
+                            }
+
+                        }
+        
+                        updatedActualRoom = actualRoom;  
+
+                        groupalEmit.updateGameStatus(io, updatedActualRoom);
+                        break;
+                    }
                 }
-            }
             }
 
         })
@@ -132,7 +132,44 @@ module.exports = {
 
     playerAttack (io, socket, rooms) {
         socket.on('playerAttacked', (data) => {
-            console.log(data);
+
+            const {firstPlayer, secondPlayer, roomId, action, points } = data;
+
+            let attackHappened = false;
+
+            for (let i = 0; i <= rooms.length - 1; i++) {
+                if (rooms[i].id === Number(roomId)) {
+
+                    let actualRoom = rooms[i]; 
+
+                    let firstPlayerToUpdateIndex = actualRoom.gameStatus.players.findIndex(playerToFind => playerToFind.name === firstPlayer.name);
+
+                    let secondPlayerToUpdateIndex = actualRoom.gameStatus.players.findIndex(playerToFind => playerToFind.name === secondPlayer.name);
+    
+                    if (firstPlayerToUpdateIndex >= 0 && secondPlayerToUpdateIndex >= 0) {
+                        
+                        switch (action) {
+                            case "ATTACK":
+                                // update second player properties
+                                actualRoom.gameStatus.players[firstPlayerToUpdateIndex]
+
+                                // update second player properties
+                                actualRoom.gameStatus.players[secondPlayerToUpdateIndex]
+                                attackHappened = true;
+                                break;
+                            
+                            default:
+                                break;
+                        }
+
+                        if (attackHappened) {
+                            updatedActualRoom = actualRoom;  
+                            // groupalEmit.updateGameStatus(io, updatedActualRoom);
+                        }
+                    }
+                    break;
+                }
+            }
         })
 
     }
