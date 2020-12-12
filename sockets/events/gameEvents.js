@@ -151,11 +151,18 @@ module.exports = {
                         switch (action) {
                             case "ATTACK":
                                 // update second player properties
-                                actualRoom.gameStatus.players[firstPlayerToUpdateIndex]
+                                // actualRoom.gameStatus.players[firstPlayerToUpdateIndex]
+
+                                console.log(actualRoom.gameStatus.players[secondPlayerToUpdateIndex])
 
                                 // update second player properties
-                                actualRoom.gameStatus.players[secondPlayerToUpdateIndex]
+                                actualRoom.gameStatus.players[secondPlayerToUpdateIndex].alive = false;
                                 attackHappened = true;
+
+                                if (actualRoom.gameStatus.players[secondPlayerToUpdateIndex].king) {
+                                    console.log("KING KILLED!")
+                                }
+
                                 break;
                             
                             default:
@@ -163,8 +170,8 @@ module.exports = {
                         }
 
                         if (attackHappened) {
-                            updatedActualRoom = actualRoom;  
-                            // groupalEmit.updateGameStatus(io, updatedActualRoom);
+                            let updatedActualRoom = actualRoom;  
+                            groupalEmit.updateGameStatus(io, updatedActualRoom);
                         }
                     }
                     break;
