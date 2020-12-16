@@ -85,6 +85,7 @@ io.on('connection', socket => {
     gameEvents.playerMoved(io, socket, rooms);
     gameEvents.playerGrabbedSphere(io, socket, rooms);
     gameEvents.playerAttack(io, socket, rooms);
+    gameEvents.respawnPlayer(io, socket, rooms);
  
     console.log('new conection established ', socket.id)
     console.log("LIST OF ALL PLAYERS")

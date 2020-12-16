@@ -157,6 +157,8 @@ module.exports = {
 
                                 // update second player properties
                                 actualRoom.gameStatus.players[secondPlayerToUpdateIndex].alive = false;
+                                actualRoom.gameStatus.players[secondPlayerToUpdateIndex].x = actualRoom.gameStatus.players[secondPlayerToUpdateIndex].deployX;
+                                actualRoom.gameStatus.players[secondPlayerToUpdateIndex].y = actualRoom.gameStatus.players[secondPlayerToUpdateIndex].deployY;
                                 attackHappened = true;
 
                                 if (actualRoom.gameStatus.players[secondPlayerToUpdateIndex].king) {
@@ -179,5 +181,11 @@ module.exports = {
             }
         })
 
+    },
+
+    respawnPlayer(io, socket, rooms) {
+        socket.on('respawnPlayer', (data) => {
+            console.log("REQUESTING RESPAWN ", data)
+        })
     }
 } 
