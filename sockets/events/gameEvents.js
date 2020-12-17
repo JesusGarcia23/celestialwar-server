@@ -157,8 +157,6 @@ module.exports = {
 
                                 // update second player properties
                                 actualRoom.gameStatus.players[secondPlayerToUpdateIndex].alive = false;
-                                actualRoom.gameStatus.players[secondPlayerToUpdateIndex].x = actualRoom.gameStatus.players[secondPlayerToUpdateIndex].deployX;
-                                actualRoom.gameStatus.players[secondPlayerToUpdateIndex].y = actualRoom.gameStatus.players[secondPlayerToUpdateIndex].deployY;
                                 attackHappened = true;
 
                                 if (actualRoom.gameStatus.players[secondPlayerToUpdateIndex].king) {
@@ -186,6 +184,29 @@ module.exports = {
     respawnPlayer(io, socket, rooms) {
         socket.on('respawnPlayer', (data) => {
             console.log("REQUESTING RESPAWN ", data)
+
+            const { myPlayer, roomId } = data;
+
+            for (let i = 0; i <= rooms.length - 1; i++) {
+                if (rooms[i].id === Number(roomId)) {
+
+                    let actualRoom = rooms[i];
+
+                    for (let j = 0; j <= actualRoom.gameStatus.players.length - 1; j++) {
+                        if ((actualRoom.gameStatus.players[j].name === myPlayer.name) && !actualRoom.gameStatus.players[j].alive) {
+                            actualRoom.gameStatus.players[j].x = actualRoom.gameStatus.players[j].deployX;
+                            actualRoom.gameStatus.players[j].y = actualRoom.gameStatus.players[j].deployY;
+                            actualRoom.gameStatus.players[j].alive = true;
+                            break;
+                        }
+                    }
+    
+                    let updatedActualRoom = actualRoom;  
+    
+                    groupalEmit.updateGameStatus(io, updatedActualRoom);
+                    break;
+                }
+            }
         })
     }
 } 
