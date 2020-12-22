@@ -274,14 +274,14 @@ export class King extends General {
 }
 
 export const defaultAngelValues = [
-    {x: 40, y: 15, width: 1.2, height: 5, direction: "RIGHT", deployX: 40, deployY: 15 },
+    {x: 40, y: 15, width: 1.2, height: 5, direction: "RIGHT", deployX: 40, deployY: 10 },
     {x: 43, y: 15, width: 1.2, height: 5, direction: "RIGHT", deployX: 43, deployY: 15 },
     {x: 45, y: 15, width: 1.2, height: 5, direction: "RIGHT", deployX: 45, deployY: 15 },
     {x: 47, y: 15, width: 1.2, height: 5, direction: "RIGHT", deployX: 47, deployY: 15 },
 ]
 
 export const defaultDemonValues = [
-    {x: 53, y: 15, width: 1.2, height: 5, direction: "LEFT", deployX: 53, deployY: 15 },
+    {x: 53, y: 15, width: 1.2, height: 5, direction: "LEFT", deployX: 53, deployY: 10 },
     {x: 55, y: 15, width: 1.2, height: 5, direction: "LEFT", deployX: 55, deployY: 15 },
     {x: 57, y: 15, width: 1.2, height: 5, direction: "LEFT", deployX: 57, deployY: 15 },
     {x: 59, y: 15, width: 1.2, height: 5, direction: "LEFT", deployX: 59, deployY: 15 },
