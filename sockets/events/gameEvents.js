@@ -11,15 +11,6 @@ module.exports = {
   
             const { user, roomId } = data;
 
-            // let actualRoomIndex = rooms.findIndex(room => room.id === Number(roomId));
-
-            // let actualRoom = rooms[actualRoomIndex];
-
-            // if (actualRoom && actualRoom.players.findIndex(player => player.username === player.username) >= 0) {
-            //     const { settings, gameStatus } = actualRoom;
-            //     individualEmit.getInitialGameStatus(socket, gameStatus)
-            // }
-
             for (let i = 0; i <= rooms.length - 1; i++) {
                 if (rooms[i].id === Number(roomId)) {
 
@@ -202,7 +193,7 @@ module.exports = {
                     }
     
                     let updatedActualRoom = actualRoom;  
-    
+                    individualEmit.resetRespawnRequest(socket, true);
                     groupalEmit.updateGameStatus(io, updatedActualRoom);
                     break;
                 }

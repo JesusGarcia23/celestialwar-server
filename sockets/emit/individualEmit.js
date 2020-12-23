@@ -26,9 +26,9 @@ module.exports = {
     },
 
     // Game Emit
-
-    getInitialGameStatus(socket, data){
-        socket.emit('getGameStatus', data);
+    resetRespawnRequest(socket) {
+        console.log("RESPAWN RECOVER")
+        socket.emit('resetRespawnRequest', false);
     }
 
 }
