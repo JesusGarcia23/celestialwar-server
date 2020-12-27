@@ -6,12 +6,14 @@ const individualEmit = require('../emit/individualEmit');
 
 module.exports = {
 
+    // get the list of all rooms
     getAllRooms (socket, rooms) {
         socket.on('getAllRooms', () => {
             individualEmit.sendAllRooms(socket, rooms)
         })
     },
 
+    // let user join to room
     joinRoom (io, socket, rooms) {
         socket.on('joinRoom', (data) => {
 
@@ -60,6 +62,7 @@ module.exports = {
         })
     },
 
+    // removes user and socket from room
     leavingRoom (io, socket, rooms) {
         socket.on('leaveRoom', (data) => {
 
@@ -97,6 +100,7 @@ module.exports = {
         })
     },
 
+    // send message to chat
     sendMessage (io, socket, rooms) {
         socket.on('sendMessage', (data) => {
 
@@ -117,6 +121,7 @@ module.exports = {
         })
     },
 
+    // moves user to the opposite team
     swapTeam (io, socket, rooms) {
         socket.on('swapTeam', (data) => {
 
@@ -144,6 +149,7 @@ module.exports = {
         })
     },
 
+    // change user status to "ready"
     setUserReady (io, socket, rooms) {
         socket.on('imReady', (data) => {
 
@@ -168,6 +174,7 @@ module.exports = {
         })
     },
 
+    // user requests king position
     kingPositionRequested (io, socket, rooms) {
         socket.on('requestKingPosition', (data) => {
             const { player, roomId, side } = data;
@@ -204,6 +211,7 @@ module.exports = {
         })
     },
 
+    // king position request is accepted and changes users positions 
     kingPositionAccepted (io, socket, rooms) {
         socket.on('acceptNewKing', (data) => {
 
@@ -252,6 +260,7 @@ module.exports = {
         })
     },
 
+    // kicks user out of the room
     kickUser (io, socket, players, rooms) {
         socket.on('kickUser', (data) => {
 
@@ -283,6 +292,7 @@ module.exports = {
         })
     },
 
+    // starts the game
     startGame (io, socket, rooms) {
         socket.on('startGame', (data) => {
 
