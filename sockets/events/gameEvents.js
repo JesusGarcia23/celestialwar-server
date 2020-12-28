@@ -3,6 +3,7 @@ const groupalEmit = require('../emit/groupalEmit');
 
 module.exports = {
 
+    // gets room's game status
     getGameStatus (io, socket, rooms) {
         socket.on('requestGameStatus', (data) => {
 
@@ -30,6 +31,7 @@ module.exports = {
         })
     },
 
+    // moves user
     playerMoved (io, socket, rooms) {
         socket.on('movePlayer', (data) => {
             const { player, roomId, direction, moveAmount } = data;
@@ -78,6 +80,7 @@ module.exports = {
         })
     },
 
+    // user grabs sphere
     playerGrabbedSphere (io, socket, rooms ) {
         socket.on('playerGrabbedSphere', (data) => {
 
@@ -121,6 +124,7 @@ module.exports = {
         })
     },
 
+    // user attacks
     playerAttack (io, socket, rooms) {
         socket.on('playerAttacked', (data) => {
 
@@ -172,6 +176,7 @@ module.exports = {
 
     },
 
+    // Respawns player back to game
     respawnPlayer(io, socket, rooms) {
         socket.on('respawnPlayer', (data) => {
             console.log("REQUESTING RESPAWN ", data)
