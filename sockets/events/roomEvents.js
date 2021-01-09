@@ -93,7 +93,7 @@ module.exports = {
                 }
 
                 roomToUpdate.players.splice(playerToRemoveIndex, 1);
-                individualEmit.userLeaveRoom(socket);
+                individualEmit.userLeaveRoom(socket, roomId);
                 groupalEmit.updateRoomData(io, roomToUpdate);
 
             }

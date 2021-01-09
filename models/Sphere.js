@@ -105,7 +105,8 @@ export class SphereCollector {
 // Team Sphere Containers (Sockets)
 
 export class SphereCollectorSocket {
-    constructor(x, y, radius, side){
+    constructor(id, x, y, radius, side) {
+        this.id = id;
         this.type = "sphere-socket";
         this.empty = true;
         this.x = x;

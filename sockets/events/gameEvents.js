@@ -124,6 +124,16 @@ module.exports = {
         })
     },
 
+    // user inserts sphere
+    playerInsertSphere (io, socket, rooms) {
+        socket.on('playerInsertSphere', (data) => {
+
+            console.log(data);
+
+            const { player, sphere, sphereSocket,roomId } = data;
+        })
+    },
+
     // user attacks
     playerAttack (io, socket, rooms) {
         socket.on('playerAttacked', (data) => {

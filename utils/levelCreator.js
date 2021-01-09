@@ -20,7 +20,7 @@ export const generatePlatforms = (listOfPlatforms) => {
                     return new SphereCollector(resource.x, resource.y,resource.width, resource.height, resource.side)
                 }
                 case 'sphere-socket': {
-                    return new SphereCollectorSocket(resource.x, resource.y, resource.radius, resource.side)
+                    return new SphereCollectorSocket(resource.id, resource.x, resource.y, resource.radius, resource.side)
                 }
                 default: 
                     return null;

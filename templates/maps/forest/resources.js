@@ -216,37 +216,8 @@ export const forestPlatForms = [
         color: 'purple'
     },
     {
-        name: 'sphere container generator 1',
-        type: 'sphere-generator',
-        x: 1.5,
-        y: 55.5,
-    },
-    {
-        name: 'sphere container generator 2',
-        type: 'sphere-generator',
-        x: 96.5,
-        y: 55.5,
-    },
-    {
-        name: 'sphere container generator 3',
-        type: 'sphere-generator',
-        x: 48.5,
-        y: 70.5,
-    },
-    {
-        name: 'sphere container generator 4',
-        type: 'sphere-generator',
-        x: 3,
-        y: 85.5,
-    },
-    {
-        name: 'sphere container generator 4',
-        type: 'sphere-generator',
-        x: 95,
-        y: 85.5,
-    },
-    {
-        name: 'Warrior pedesta; 1',
+        id: 22,
+        name: 'Warrior pedestal 1',
         type: 'warrior-pedestal',
         width: 2,
         height: 7.5,
@@ -254,7 +225,8 @@ export const forestPlatForms = [
         y: 32.5,
     },
     {
-        name: 'Warrior pedesta; 1',
+        id: 23,
+        name: 'Warrior pedestal 1',
         type: 'warrior-pedestal',
         width: 2,
         height: 7.5,
@@ -262,6 +234,7 @@ export const forestPlatForms = [
         y: 32.5,
     },
     {
+        id: 24,
         name: 'sphere-collector',
         type: 'sphere-collector',
         x: 35.3,
@@ -271,6 +244,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 25,
         name: 'sphere-collector',
         type: 'sphere-collector',
         x: 50.7,
@@ -280,6 +254,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 26,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 3,
@@ -288,6 +263,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 27,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 4,
@@ -296,6 +272,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 28,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 4,
@@ -304,6 +281,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 29,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 5,
@@ -312,6 +290,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 30,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 6,
@@ -320,6 +299,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 31,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 6,
@@ -328,6 +308,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 32,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 7,
@@ -336,6 +317,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 33,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 8,
@@ -344,6 +326,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 34,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 8,
@@ -352,6 +335,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 35,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 9,
@@ -360,6 +344,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 36,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 10,
@@ -368,6 +353,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 37,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 10,
@@ -376,6 +362,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 38,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 35.3 + 11,
@@ -384,6 +371,7 @@ export const forestPlatForms = [
         side: "Angel"
     },
     {
+        id: 39,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7  + 3,
@@ -392,6 +380,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 40,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7  + 4,
@@ -400,6 +389,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 41,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7  + 4,
@@ -408,6 +398,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 42,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7  + 5,
@@ -416,6 +407,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 43,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 6,
@@ -424,6 +416,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 44,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 6,
@@ -432,6 +425,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 45,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 7,
@@ -440,6 +434,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 46,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 8,
@@ -448,6 +443,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 47,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 8,
@@ -456,6 +452,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 48,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 9,
@@ -464,6 +461,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 49,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 10,
@@ -472,6 +470,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 50,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 10,
@@ -480,6 +479,7 @@ export const forestPlatForms = [
         side: "Demon"
     },
     {
+        id: 51,
         name: 'sphere-socket',
         type: 'sphere-socket',
         x: 50.7 + 11,

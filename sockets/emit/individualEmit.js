@@ -24,8 +24,8 @@ module.exports = {
     },
 
     // removes user from the room
-    userLeaveRoom(socket) {
-        socket.leaves(`room/${roomId}`);
+    userLeaveRoom(socket, roomId) {
+        socket.leave(`room/${roomId}`);
         socket.emit('exitedRoom', true);
     },
 
