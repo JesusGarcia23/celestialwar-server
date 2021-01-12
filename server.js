@@ -84,6 +84,7 @@ io.on('connection', socket => {
     gameEvents.getGameStatus(io, socket, rooms);
     gameEvents.playerMoved(io, socket, rooms);
     gameEvents.playerGrabbedSphere(io, socket, rooms);
+    gameEvents.playerInsertSphere(io, socket, rooms);
     gameEvents.playerAttack(io, socket, rooms);
     gameEvents.respawnPlayer(io, socket, rooms);
  

@@ -106,7 +106,7 @@ module.exports = {
 
                             if (actualRoom.gameStatus.players[j].name === player.name && !actualRoom.gameStatus.players[j].sphereGrabbed 
                                 && sphereToGrab && sphereToGrab.grabbedBy === "") {
-                                actualRoom.gameStatus.spheres[sphereToGrabIndex] = player.name;
+                                actualRoom.gameStatus.spheres[sphereToGrabIndex].grabbedBy = player.name;
                                 actualRoom.gameStatus.players[j].sphereGrabbed = true;
                                 break;
                             }
@@ -127,7 +127,7 @@ module.exports = {
     // user inserts sphere
     playerInsertSphere (io, socket, rooms) {
         socket.on('playerInsertSphere', (data) => {
-
+            console.log("INSERT SPHERE REQUEST")
             console.log(data);
 
             const { player, sphere, sphereSocket,roomId } = data;
