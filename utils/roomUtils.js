@@ -90,9 +90,37 @@ export const playerAttackSystem = (actualRoom, firstPlayer, secondPlayer, action
     return {attackHappened: attackHappened, room: actualRoom};
 }
 
+export const sphereInserter = (room, sphereSocket, sphere, player) => {
+
+    for (let i = 0; i <= room.gameStatus.players.length - 1; i++) {
+        if (player.name === room.gameStatus.players[i].name) {
+            room.gameStatus.players[i].sphereGrabbed = false;
+            break;
+        }
+    }
+
+    for (let i = 0; i <= room.gameStatus.spheres.length - 1; i++) {
+        if (sphere.id === room.gameStatus.spheres[i].id) {
+            room.gameStatus.spheres[i].grabbedBy = '';
+            room.gameStatus.spheres[i].hide = true;
+            break;
+        }
+    }
+
+    for (let i = 0; i <= room.gameStatus.map.length - 1; i++) {
+        if (sphereSocket.id === room.gameStatus.map[i].id) {
+            room.gameStatus.map[i].empty = false;
+            room.gameStatus.map[i].color = "blue";
+            break;
+        }
+    }
+
+    return room;
+}
+
 export const playerRespawner = (room, player) => {
 
-    for (let j = 0; j <= actualRoom.gameStatus.players.length - 1; j++) {
+    for (let j = 0; j <= room.gameStatus.players.length - 1; j++) {
         if ((room.gameStatus.players[j].name === player.name) && !room.gameStatus.players[j].alive) {
             room.gameStatus.players[j].x = room.gameStatus.players[j].deployX;
             room.gameStatus.players[j].y = room.gameStatus.players[j].deployY;

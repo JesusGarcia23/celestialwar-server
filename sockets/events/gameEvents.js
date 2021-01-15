@@ -1,6 +1,6 @@
 const individualEmit = require('../emit/individualEmit');
 const groupalEmit = require('../emit/groupalEmit');
-const { roomFinder, movePlayer, grabSphere, playerRespawner, playerAttackSystem } = require('../../utils/roomUtils');
+const { roomFinder, movePlayer, grabSphere, playerRespawner, playerAttackSystem, sphereInserter } = require('../../utils/roomUtils');
 
 module.exports = {
 
@@ -35,14 +35,13 @@ module.exports = {
     playerMoved (io, socket, rooms) {
         socket.on('movePlayer', (data) => {
             const { player, roomId, direction, moveAmount } = data;
-            let updatedActualRoom = null;
 
             let actualRoom = roomFinder(roomId, rooms);
 
             if (actualRoom) {
 
                 // return room with player positions updated (player moved)
-                updatedActualRoom = movePlayer(actualRoom, player, direction, moveAmount);
+                let updatedActualRoom = movePlayer(actualRoom, player, direction, moveAmount);
 
                 groupalEmit.updateGameStatus(io, updatedActualRoom);
             }
@@ -55,8 +54,6 @@ module.exports = {
         socket.on('playerGrabbedSphere', (data) => {
 
             const { player, sphere, roomId } = data;
-
-            let updatedActualRoom = null;
 
             let actualRoom = roomFinder(roomId, rooms);
 
@@ -73,7 +70,7 @@ module.exports = {
                 sphereToGrab = actualRoom.gameStatus.spheres[sphereToGrabIndex];
 
                 // return room with player and sphere updated properties
-                updatedActualRoom = grabSphere(actualRoom, player, sphereToGrabIndex, sphereToGrab);  
+                let updatedActualRoom = grabSphere(actualRoom, player, sphereToGrabIndex, sphereToGrab);  
 
                 groupalEmit.updateGameStatus(io, updatedActualRoom);
 
@@ -86,9 +83,18 @@ module.exports = {
     playerInsertSphere (io, socket, rooms) {
         socket.on('playerInsertSphere', (data) => {
             console.log("INSERT SPHERE REQUEST")
-            console.log(data);
 
             const { player, sphere, sphereSocket, roomId } = data;
+
+            let actualRoom = roomFinder(roomId, rooms);
+
+            if (actualRoom && player.sphereGrabbed &&  sphereSocket.empty) {
+
+                // returns room with sphere, sphereSocket and player with updated properties
+                let updatedActualRoom = sphereInserter(actualRoom, sphereSocket, sphere, player);
+
+                groupalEmit.updateGameStatus(io, updatedActualRoom);
+            }
         })
     },
 

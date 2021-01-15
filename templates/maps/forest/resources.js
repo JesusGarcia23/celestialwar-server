@@ -493,7 +493,7 @@ export const forestPlatForms = [
 export const forestSpheres = [
     {
         radius: 0.5,
-        id: 1,
+        id: 52,
         x: 1.5,
         y: 59.2,
         hide: false,
@@ -503,7 +503,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 2,
+        id: 53,
         x: 2.2,
         y: 59.2,
         hide: false,
@@ -513,7 +513,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 3,
+        id: 54,
         x: 2.9,
         y: 59.2,
         hide: false,
@@ -523,7 +523,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 4,
+        id: 55,
         x: 1.85,
         y: 58,
         hide: false,
@@ -533,7 +533,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 5,
+        id: 56,
         x: 2.55,
         y: 58,
         hide: false,
@@ -543,7 +543,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 6,
+        id: 57,
         x: 2.2,
         y: 56.8,
         hide: false,
@@ -553,7 +553,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 7,
+        id: 58,
         x: 98.5,
         y: 59.2,
         hide: false,
@@ -563,7 +563,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 8,
+        id: 59,
         x: 97.8,
         y: 59.2,
         hide: false,
@@ -573,7 +573,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 9,
+        id: 60,
         x: 97.1,
         y: 59.2,
         hide: false,
@@ -583,7 +583,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 10,
+        id: 61,
         x: 98.15,
         y: 58,
         hide: false,
@@ -593,7 +593,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 11,
+        id: 62,
         x: 97.45,
         y: 58,
         hide: false,
@@ -603,7 +603,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 12,
+        id: 63,
         x: 97.8,
         y: 56.8,
         hide: false,
@@ -613,7 +613,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 13,
+        id: 64,
         x: 3,
         y: 89.3,
         hide: false,
@@ -623,7 +623,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 14,
+        id: 65,
         x: 3.68,
         y: 89.3,
         hide: false,
@@ -633,7 +633,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 15,
+        id: 66,
         x: 4.35,
         y: 89.3,
         hide: false,
@@ -643,7 +643,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 16,
+        id: 67,
         x: 3.35,
         y: 88,
         hide: false,
@@ -653,7 +653,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 17,
+        id: 68,
         x: 4.05,
         y: 88,
         hide: false,
@@ -663,7 +663,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 18,
+        id: 69,
         x: 3.72,
         y: 86.7,
         hide: false,
@@ -673,7 +673,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 19,
+        id: 70,
         x: 96.9,
         y: 89.3,
         hide: false,
@@ -683,7 +683,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 20,
+        id: 71,
         x: 96.2,
         y: 89.3,
         hide: false,
@@ -693,7 +693,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 21,
+        id: 72,
         x: 95.5,
         y: 89.3,
         hide: false,
@@ -703,7 +703,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 22,
+        id: 73,
         x: 95.85,
         y: 88,
         hide: false,
@@ -713,7 +713,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 23,
+        id: 74,
         x: 96.55,
         y: 88,
         hide: false,
@@ -723,7 +723,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 24,
+        id: 75,
         x: 96.2,
         y: 86.7,
         hide: false,
@@ -733,7 +733,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 25,
+        id: 76,
         x: 48.5,
         y: 89.3,
         hide: false,
@@ -743,7 +743,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 26,
+        id: 77,
         x: 49.2,
         y: 89.3,
         hide: false,
@@ -753,7 +753,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 27,
+        id: 78,
         x: 49.9,
         y: 89.3,
         hide: false,
@@ -763,7 +763,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 28,
+        id: 79,
         x: 48.85,
         y: 88,
         hide: false,
@@ -773,7 +773,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 29,
+        id: 80,
         x: 49.55,
         y: 88,
         hide: false,
@@ -783,7 +783,7 @@ export const forestSpheres = [
     },
     {
         radius: 0.5,
-        id: 30,
+        id: 81,
         x: 49.2,
         y: 86.7,
         hide: false,
