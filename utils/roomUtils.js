@@ -121,7 +121,7 @@ export const sphereInserter = (room, sphereSocket, sphere, player) => {
         room.gameStatus.demonPoints += 1;
     }
 
-    //  check if any team won already
+    //  check if team won already by the count of spheres inserted
     if (room.gameStatus.angelPoints === 13) {
         room.gameStatus.winner = "Angel";
         room.gameStatus.gameFinished = true;
