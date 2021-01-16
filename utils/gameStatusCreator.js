@@ -20,6 +20,12 @@ import { forestPlatForms, forestSpheres } from '../templates/maps/forest/resourc
         }
 
         let newGameStatus = {
+            angelKills: 0,
+            demonKills: 0,
+            angelPoints: 0,
+            demonPoints: 0,
+            winner : "",
+            gameFinished: false,
             players,
             spheres,
             map,

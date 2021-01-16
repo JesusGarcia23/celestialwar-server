@@ -115,6 +115,21 @@ export const sphereInserter = (room, sphereSocket, sphere, player) => {
         }
     }
 
+    if (player.side === "Angel") {
+        room.gameStatus.angelPoints += 1;
+    } else {
+        room.gameStatus.demonPoints += 1;
+    }
+
+    //  check if any team won already
+    if (room.gameStatus.angelPoints === 13) {
+        room.gameStatus.winner = "Angel";
+        room.gameStatus.gameFinished = true;
+    } else if (room.gameStatus.demonPoints === 13) {
+        room.gameStatus.winner = "Demon";
+        room.gameStatus.gameFinished = true;
+    }
+
     return room;
 }
 
