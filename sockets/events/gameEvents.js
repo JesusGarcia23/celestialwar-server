@@ -121,10 +121,24 @@ module.exports = {
 
     },
 
+    // transforms player to warrior
+    transformToWarrior(io, socket, rooms) {
+        socket.on('transformToWarrior', (data) => {
+            console.log("REQUEST TRANSFORM TO WARRIOR")
+            console.log(data);
+
+            let actualRoom = roomFinder(roomId, rooms);
+
+            if (actualRoom) {
+                
+                // groupalEmit.updateGameStatus(io, updatedActualRoom);
+            }
+        })
+    },
+
     // Respawns player back to game
     respawnPlayer(io, socket, rooms) {
         socket.on('respawnPlayer', (data) => {
-            console.log("REQUESTING RESPAWN ", data)
 
             const { player, roomId } = data;
 

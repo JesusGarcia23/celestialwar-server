@@ -86,6 +86,7 @@ io.on('connection', socket => {
     gameEvents.playerGrabbedSphere(io, socket, rooms);
     gameEvents.playerInsertSphere(io, socket, rooms);
     gameEvents.playerAttack(io, socket, rooms);
+    gameEvents.transformToWarrior(io, socket, rooms);
     gameEvents.respawnPlayer(io, socket, rooms);
  
     console.log('new conection established ', socket.id)
