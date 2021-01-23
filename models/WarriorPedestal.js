@@ -1,5 +1,6 @@
 export class WarriorPedestal {
-    constructor(width, height, x, y){
+    constructor(id, width, height, x, y) {
+        this.id = id;
         this.width = width;
         this.height = height;
         this.type = 'warrior-pedestal';

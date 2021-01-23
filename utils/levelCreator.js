@@ -11,7 +11,7 @@ export const generatePlatforms = (listOfPlatforms) => {
                     return new Resource(resource.name, resource.type, index + 1, resource.width, resource.height, resource.x, resource.y, resource.color, resource.xPreference, resource.yPreference);
                 }
                 case 'warrior-pedestal': {
-                    return new WarriorPedestal(resource.width, resource.height, resource.x, resource.y)
+                    return new WarriorPedestal(resource.id, resource.width, resource.height, resource.x, resource.y)
                 }
                 case 'sphere-generator': {
                     return new SphereGenerator(resource.name, resource.type, resource.x, resource.y);

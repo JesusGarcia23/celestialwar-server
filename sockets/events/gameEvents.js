@@ -1,6 +1,6 @@
 const individualEmit = require('../emit/individualEmit');
 const groupalEmit = require('../emit/groupalEmit');
-const { roomFinder, movePlayer, grabSphere, playerRespawner, playerAttackSystem, sphereInserter } = require('../../utils/roomUtils');
+const { roomFinder, movePlayer, grabSphere, playerRespawner, playerAttackSystem, sphereInserter, playerTransformWarrior } = require('../../utils/roomUtils');
 
 module.exports = {
 
@@ -124,14 +124,20 @@ module.exports = {
     // transforms player to warrior
     transformToWarrior(io, socket, rooms) {
         socket.on('transformToWarrior', (data) => {
-            console.log("REQUEST TRANSFORM TO WARRIOR")
-            console.log(data);
+            console.log("REQUEST TRANSFORM TO WARRIOR");
+
+            const { player, warriorPedestal, roomId } = data;
+
+            console.log(roomId)
 
             let actualRoom = roomFinder(roomId, rooms);
 
-            if (actualRoom) {
+            if (actualRoom && !player.modeWarrior) {
                 
-                // groupalEmit.updateGameStatus(io, updatedActualRoom);
+                // return room with player, sphere and warrior pedestal properties updated
+                let updatedActualRoom = playerTransformWarrior(actualRoom, player, warriorPedestal);  
+
+                groupalEmit.updateGameStatus(io, updatedActualRoom);
             }
         })
     },

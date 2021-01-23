@@ -92,6 +92,7 @@ export const playerAttackSystem = (actualRoom, firstPlayer, secondPlayer, action
 
 export const sphereInserter = (room, sphereSocket, sphere, player) => {
 
+    // change player sphereGrabbed to false
     for (let i = 0; i <= room.gameStatus.players.length - 1; i++) {
         if (player.name === room.gameStatus.players[i].name) {
             room.gameStatus.players[i].sphereGrabbed = false;
@@ -99,6 +100,7 @@ export const sphereInserter = (room, sphereSocket, sphere, player) => {
         }
     }
 
+    // change sphere grabbedBy to '' and hide to True
     for (let i = 0; i <= room.gameStatus.spheres.length - 1; i++) {
         if (sphere.id === room.gameStatus.spheres[i].id) {
             room.gameStatus.spheres[i].grabbedBy = '';
@@ -107,6 +109,7 @@ export const sphereInserter = (room, sphereSocket, sphere, player) => {
         }
     }
 
+    // change sphereSocket empty to false and color to 'blue'
     for (let i = 0; i <= room.gameStatus.map.length - 1; i++) {
         if (sphereSocket.id === room.gameStatus.map[i].id) {
             room.gameStatus.map[i].empty = false;
@@ -115,6 +118,7 @@ export const sphereInserter = (room, sphereSocket, sphere, player) => {
         }
     }
 
+    // add points to team
     if (player.side === "Angel") {
         room.gameStatus.angelPoints += 1;
     } else {
@@ -128,6 +132,44 @@ export const sphereInserter = (room, sphereSocket, sphere, player) => {
     } else if (room.gameStatus.demonPoints === 13) {
         room.gameStatus.winner = "Demon";
         room.gameStatus.gameFinished = true;
+    }
+
+    return room;
+}
+
+export const playerTransformWarrior = (room, player, warriorPedestal) => {
+
+    let playerSide = null;
+    let playerName = null;
+
+    // change player modeWarrior to true and sphereGrabbed to False
+    for (let j = 0; j <= room.gameStatus.players.length - 1; j++) {
+        if ((room.gameStatus.players[j].name === player.name) && !room.gameStatus.players[j].modeWarrior) {
+            room.gameStatus.players[j].modeWarrior = true;
+            room.gameStatus.players[j].sphereGrabbed = false;
+            playerSide = room.gameStatus.players[j].side;
+            playerName = room.gameStatus.players[j].name;
+            break;
+        }
+    }
+
+    // change warriorPedestal activated to true and side to player's side
+    for (let i = 0; i <= room.gameStatus.map.length - 1; i++) {
+        if (playerSide && (warriorPedestal.id === room.gameStatus.map[i].id)) {
+            room.gameStatus.map[i].activated = true;
+            room.gameStatus.map[i].color = "yellow";
+            room.gameStatus.map[i].side = playerSide;
+            break;
+        }
+    }
+
+    // change sphere grabbedBy to '' and hide to True
+    for (let i = 0; i <= room.gameStatus.spheres.length - 1; i++) {
+        if (playerName && (playerName === room.gameStatus.spheres[i].grabbedBy)) {
+            room.gameStatus.spheres[i].grabbedBy = '';
+            room.gameStatus.spheres[i].hide = true;
+            break;
+        }
     }
 
     return room;
