@@ -175,7 +175,7 @@ export const playerTransformWarrior = (room, player, warriorPedestal) => {
     return room;
 }
 
-export const playerRespawner = (room, player) => {
+export const playerRespawner = (player, room) => {
 
     for (let j = 0; j <= room.gameStatus.players.length - 1; j++) {
         if ((room.gameStatus.players[j].name === player.name) && !room.gameStatus.players[j].alive) {
