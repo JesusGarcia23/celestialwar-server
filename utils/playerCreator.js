@@ -19,7 +19,7 @@ export const generatePlayers = (angelTeam, demonTeam) => {
                 onFloor: true,
                 king: false,
                 kills: 0,
-                modeWarrior: false,
+                modeWarrior: true,
             }
         } else {
             return {
@@ -57,7 +57,7 @@ export const generatePlayers = (angelTeam, demonTeam) => {
                 alive: true,
                 sphereGrabbed: false,
                 onFloor: true,
-                king: false,
+                king: true,
                 kills: 0,
                 modeWarrior: true,
             }

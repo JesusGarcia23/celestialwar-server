@@ -70,16 +70,24 @@ export const playerAttackSystem = (actualRoom, firstPlayer, secondPlayer, action
         switch (action) {
             case "ATTACK":
 
-                console.log(actualRoom.gameStatus.players[secondPlayerToUpdateIndex])
+                console.log(actualRoom.gameStatus.players[firstPlayerToUpdateIndex]);
+
+                console.log(actualRoom)
 
                 // update second player properties
                 actualRoom.gameStatus.players[secondPlayerToUpdateIndex].alive = false;
                 attackHappened = true;
 
+                // Check if player killed is king (to add points to score)
                 if (actualRoom.gameStatus.players[secondPlayerToUpdateIndex].king) {
-                    console.log("KING KILLED!")
-                }
 
+                    // Check player team to add points to the kills (angelKills or demonKills)
+                    if (actualRoom.gameStatus.players[firstPlayerToUpdateIndex].side === "Angel") {
+                        actualRoom.gameStatus.angelKills += 1;
+                    } else {
+                        actualRoom.gameStatus.demonKills += 1;
+                    }
+                }
                 break;
             
             default:
@@ -187,4 +195,9 @@ export const playerRespawner = (player, room) => {
     }
 
     return room;
+}
+
+//  check if there is a winner
+const checkForWinner = () => {
+
 }
