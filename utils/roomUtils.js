@@ -70,10 +70,6 @@ export const playerAttackSystem = (actualRoom, firstPlayer, secondPlayer, action
         switch (action) {
             case "ATTACK":
 
-                console.log(actualRoom.gameStatus.players[firstPlayerToUpdateIndex]);
-
-                console.log(actualRoom)
-
                 // update second player properties
                 actualRoom.gameStatus.players[secondPlayerToUpdateIndex].alive = false;
                 attackHappened = true;
@@ -87,6 +83,8 @@ export const playerAttackSystem = (actualRoom, firstPlayer, secondPlayer, action
                     } else {
                         actualRoom.gameStatus.demonKills += 1;
                     }
+
+                    checkForWinner(actualRoom, "kills");
                 }
                 break;
             
@@ -98,51 +96,44 @@ export const playerAttackSystem = (actualRoom, firstPlayer, secondPlayer, action
     return {attackHappened: attackHappened, room: actualRoom};
 }
 
-export const sphereInserter = (room, sphereSocket, sphere, player) => {
+export const sphereInserter = (actualRoom, sphereSocket, sphere, player) => {
 
     // change player sphereGrabbed to false
-    for (let i = 0; i <= room.gameStatus.players.length - 1; i++) {
-        if (player.name === room.gameStatus.players[i].name) {
-            room.gameStatus.players[i].sphereGrabbed = false;
+    for (let i = 0; i <= actualRoom.gameStatus.players.length - 1; i++) {
+        if (player.name === actualRoom.gameStatus.players[i].name) {
+            actualRoom.gameStatus.players[i].sphereGrabbed = false;
             break;
         }
     }
 
     // change sphere grabbedBy to '' and hide to True
-    for (let i = 0; i <= room.gameStatus.spheres.length - 1; i++) {
-        if (sphere.id === room.gameStatus.spheres[i].id) {
-            room.gameStatus.spheres[i].grabbedBy = '';
-            room.gameStatus.spheres[i].hide = true;
+    for (let i = 0; i <= actualRoom.gameStatus.spheres.length - 1; i++) {
+        if (sphere.id === actualRoom.gameStatus.spheres[i].id) {
+            actualRoom.gameStatus.spheres[i].grabbedBy = '';
+            actualRoom.gameStatus.spheres[i].hide = true;
             break;
         }
     }
 
     // change sphereSocket empty to false and color to 'blue'
-    for (let i = 0; i <= room.gameStatus.map.length - 1; i++) {
-        if (sphereSocket.id === room.gameStatus.map[i].id) {
-            room.gameStatus.map[i].empty = false;
-            room.gameStatus.map[i].color = "blue";
+    for (let i = 0; i <= actualRoom.gameStatus.map.length - 1; i++) {
+        if (sphereSocket.id === actualRoom.gameStatus.map[i].id) {
+            actualRoom.gameStatus.map[i].empty = false;
+            actualRoom.gameStatus.map[i].color = "blue";
             break;
         }
     }
 
     // add points to team
     if (player.side === "Angel") {
-        room.gameStatus.angelPoints += 1;
+        actualRoom.gameStatus.angelPoints += 1;
     } else {
-        room.gameStatus.demonPoints += 1;
+        actualRoom.gameStatus.demonPoints += 1;
     }
 
-    //  check if team won already by the count of spheres inserted
-    if (room.gameStatus.angelPoints === 13) {
-        room.gameStatus.winner = "Angel";
-        room.gameStatus.gameFinished = true;
-    } else if (room.gameStatus.demonPoints === 13) {
-        room.gameStatus.winner = "Demon";
-        room.gameStatus.gameFinished = true;
-    }
+    checkForWinner(actualRoom, "socketPoints");
 
-    return room;
+    return actualRoom;
 }
 
 export const playerTransformWarrior = (room, player, warriorPedestal) => {
@@ -198,6 +189,30 @@ export const playerRespawner = (player, room) => {
 }
 
 //  check if there is a winner
-const checkForWinner = () => {
+const checkForWinner = (actualRoom, mode) => {
 
+    switch (mode) {
+        case "socketPoints":   
+            //  check if team won already by the count of spheres inserted
+            if (actualRoom.gameStatus.angelPoints === 13) {
+                actualRoom.gameStatus.winner = "Angel";
+                actualRoom.gameStatus.gameFinished = true;
+            } else if (actualRoom.gameStatus.demonPoints === 13) {
+                actualRoom.gameStatus.winner = "Demon";
+                actualRoom.gameStatus.gameFinished = true;
+            }
+            break;
+        case "kills":
+            //  check if team won already by the count of enemy king killed
+            if (actualRoom.gameStatus.demonKills === 3) {
+                actualRoom.gameStatus.winner = "Demon";
+                actualRoom.gameStatus.gameFinished = true;
+            } else if (actualRoom.gameStatus.angelKills === 3) {
+                actualRoom.gameStatus.winner = "Angel";
+                actualRoom.gameStatus.gameFinished = true;
+            }
+        default:
+            break;
+
+    }
 }
