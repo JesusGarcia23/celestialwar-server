@@ -74,6 +74,11 @@ export const playerAttackSystem = (actualRoom, firstPlayer, secondPlayer, action
                 actualRoom.gameStatus.players[secondPlayerToUpdateIndex].alive = false;
                 attackHappened = true;
 
+                // remove modeWarrior property from dead player
+                if (!actualRoom.gameStatus.players[secondPlayerToUpdateIndex].king) {
+                    actualRoom.gameStatus.players[secondPlayerToUpdateIndex].modeWarrior = false;
+                }
+
                 // Check if player killed is king (to add points to score)
                 if (actualRoom.gameStatus.players[secondPlayerToUpdateIndex].king) {
 
