@@ -70,23 +70,53 @@ io.on('connection', socket => {
 
     // Rooms Sockets
     roomEvents.getAllRooms(socket, rooms);
+
+    // socket when user joins room
     roomEvents.joinRoom(io, socket, rooms);
+
+    // socket when user leaves room
     roomEvents.leavingRoom(io, socket, rooms);
+
+    // socket when user sends message to chat
     roomEvents.sendMessage(io, socket, rooms);
+    
+    // socket when user swaps team
     roomEvents.swapTeam(io, socket, rooms);
+
+    // socket to set user "ready" satus 
     roomEvents.setUserReady(io, socket, rooms);
+
+    // socket to request new King position
     roomEvents.kingPositionRequested(io, socket, rooms);
+
+    // socket to update new King position
     roomEvents.kingPositionAccepted(io, socket, rooms);
+
+    // socket to kick user from room
     roomEvents.kickUser(io, socket, players, rooms);
+
+    // socket to start game
     roomEvents.startGame(io, socket, rooms);
 
     // Game Sockets
     gameEvents.getGameStatus(io, socket, rooms);
+
+     // socket when player moves
     gameEvents.playerMoved(io, socket, rooms);
+
+    // socket when player grabs a sphere
     gameEvents.playerGrabbedSphere(io, socket, rooms);
+
+    // socket when player dies and wants to respawn
     gameEvents.playerInsertSphere(io, socket, rooms);
+
+    // socket when player attacks other players
     gameEvents.playerAttack(io, socket, rooms);
+
+    // socket when player wants to transform to warrior
     gameEvents.transformToWarrior(io, socket, rooms);
+
+    // socket when player dies and wants to respawn
     gameEvents.respawnPlayer(io, socket, rooms);
  
     console.log('new conection established ', socket.id)
